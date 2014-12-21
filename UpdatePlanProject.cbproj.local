@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2014-12-20 10:20:26.192,=C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>2014-12-20 10:21:02.041,V:\My Projects\UpdatePlan\Main.dfm=C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2014-12-20 10:21:02.041,V:\My Projects\UpdatePlan\Main.h=C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.h</Transaction>
-    <Transaction>2014-12-20 10:21:02.041,V:\My Projects\UpdatePlan\Main.cpp=C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>2014-12-20 10:21:22.507,V:\My Projects\UpdatePlan\UpdatePlanProject.cbproj=C:\Users\Administrator\Documents\RAD Studio\Projects\Project1.cbproj</Transaction>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.192,=C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.041,C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.cpp=V:\My Projects\UpdatePlan\Main.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.041,C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.dfm=V:\My Projects\UpdatePlan\Main.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.041,C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.h=V:\My Projects\UpdatePlan\Main.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.507,C:\Users\Administrator\Documents\RAD Studio\Projects\Project1.cbproj=V:\My Projects\UpdatePlan\UpdatePlanProject.cbproj</Transaction>
   </Transactions>
 </BorlandProject>
