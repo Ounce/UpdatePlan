@@ -12,6 +12,9 @@
 #include "BaseGrid.hpp"
 #include <Vcl.Grids.hpp>
 #include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtCtrls.hpp>
+
+#include "TPlan.h"
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
@@ -20,11 +23,16 @@ __published:	// IDE-managed Components
 	TButton *OpenButton;
 	TButton *CloseButton;
 	TOpenDialog *ExcelOpenDialog;
+	TImage *Image1;
+	TButton *DrawButton;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
+	void __fastcall DrawButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
+	TPlan Plan;
 	__fastcall TMainForm(TComponent* Owner);
+    void __fastcall Import(void);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainForm *MainForm;

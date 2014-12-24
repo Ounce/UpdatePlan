@@ -107,6 +107,14 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
+    object Image1: TImage
+      Left = 0
+      Top = 0
+      Width = 623
+      Height = 384
+      Align = alTop
+      Anchors = [akLeft, akTop, akRight, akBottom]
+    end
   end
   object OpenButton: TButton
     Left = 112
@@ -127,6 +135,16 @@ object MainForm: TMainForm
     Caption = #20851#38381
     TabOrder = 2
     OnClick = CloseButtonClick
+  end
+  object DrawButton: TButton
+    Left = 272
+    Top = 392
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = #32472#22270
+    TabOrder = 3
+    OnClick = DrawButtonClick
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'

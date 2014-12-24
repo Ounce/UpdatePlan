@@ -100,6 +100,22 @@
 				<DependentOn>Main.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="TArc.cpp">
+				<DependentOn>TArc.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="TLine.cpp">
+				<DependentOn>TLine.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="TPlan.cpp">
+				<DependentOn>TPlan.h</DependentOn>
+				<BuildOrder>5</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="TVector.cpp">
+				<DependentOn>TVector.h</DependentOn>
+				<BuildOrder>5</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="UpdatePlanProject.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
