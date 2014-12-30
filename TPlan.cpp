@@ -7,33 +7,36 @@
 #pragma package(smart_init)
 
 //---------------------------------------------------------------------------
+__fastcall TPlan::TPlan() {
+}
+
+//---------------------------------------------------------------------------
 void __fastcall TPlan::Clear(void) {
     Arcs.clear();
     Lines.clear();
+    return;
 }
 
 //---------------------------------------------------------------------------
-double __fastcall TPlan::GetWidth(void) {
-    return abs(MaxX - MinX);
-}
-
-//---------------------------------------------------------------------------
-
-double __fastcall TPlan::GetHeight(void) {
-    return abs(MaxY - MinY);
-}
-
-//---------------------------------------------------------------------------
-double __fastcall TPlan::GetScale(TImage * Image) {
-    double s1 = Image->Width / GetWidth();
-    double s2 = Image->Height / GetHeight();
-    return (s1 > s2) ? s2 : s1;
+void __fastcall TPlan::SetOrigin(TImage * Image) {
+	SetMaxMin();
+    double s1 = Image->Width / Width;
+    double s2 = Image->Height / Height;
+    if (s1 < s2) {	//图的X方向大于Y方向，即长度大于高度。
+    	Scale = s1;
+        OriginX = MinX;
+        OriginY = MinY - (Image->Height / Scale - Height) * 0.5;
+    } else {
+        Scale = s2;
+        OriginX = MinX - (Image->Width / Scale - Width) * 0.5;
+        OriginY = MinY;
+    }
+    return;
 }
 
 //---------------------------------------------------------------------------
 void __fastcall TPlan::Draw(TImage * Image) {
-	SetMaxMin();
-    double Scale = GetScale(Image);
+	SetOrigin(Image);
     Arcs.Draw(Image, Scale, OriginX, OriginY);
     Lines.Draw(Image, Scale, OriginX, OriginY);
     return;
@@ -47,8 +50,8 @@ void __fastcall TPlan::SetMaxMin(void) {
     MinX = (Lines.MinX < Arcs.MinX) ? Lines.MinX : Arcs.MinX;
     MaxY = (Lines.MaxY > Arcs.MaxY) ? Lines.MaxY : Arcs.MaxY;
     MinY = (Lines.MinY < Arcs.MinY) ? Lines.MinY : Arcs.MinY;
-    OriginX = MinX;
-    OriginY = MinY;
+    Width = abs(MaxX - MinX);
+    Height = abs(MaxY - MinY);
     return;
 }
 

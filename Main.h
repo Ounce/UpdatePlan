@@ -25,6 +25,7 @@ __published:	// IDE-managed Components
 	TOpenDialog *ExcelOpenDialog;
 	TImage *Image1;
 	TButton *DrawButton;
+	TButton *DistinguishButton;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
 	void __fastcall DrawButtonClick(TObject *Sender);

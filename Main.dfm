@@ -111,9 +111,10 @@ object MainForm: TMainForm
       Left = 0
       Top = 0
       Width = 623
-      Height = 384
+      Height = 401
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
+      ExplicitHeight = 384
     end
   end
   object OpenButton: TButton
@@ -127,7 +128,7 @@ object MainForm: TMainForm
     OnClick = OpenButtonClick
   end
   object CloseButton: TButton
-    Left = 437
+    Left = 517
     Top = 392
     Width = 75
     Height = 25
@@ -137,7 +138,7 @@ object MainForm: TMainForm
     OnClick = CloseButtonClick
   end
   object DrawButton: TButton
-    Left = 272
+    Left = 240
     Top = 392
     Width = 75
     Height = 25
@@ -145,6 +146,15 @@ object MainForm: TMainForm
     Caption = #32472#22270
     TabOrder = 3
     OnClick = DrawButtonClick
+  end
+  object DistinguishButton: TButton
+    Left = 368
+    Top = 392
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = #35782#21035
+    TabOrder = 4
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'

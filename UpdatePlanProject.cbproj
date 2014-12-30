@@ -112,6 +112,10 @@
 				<DependentOn>TPlan.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="TSwitch.cpp">
+				<DependentOn>TSwitch.h</DependentOn>
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="TVector.cpp">
 				<DependentOn>TVector.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
