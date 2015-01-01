@@ -27,10 +27,12 @@ __published:	// IDE-managed Components
 	TButton *DrawButton;
 	TButton *DistinguishButton;
 	TLabel *Label1;
+	TButton *DrawSwitchesButton;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
 	void __fastcall DrawButtonClick(TObject *Sender);
 	void __fastcall DistinguishButtonClick(TObject *Sender);
+	void __fastcall DrawSwitchesButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	TPlan Plan;

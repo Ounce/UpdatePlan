@@ -77,3 +77,9 @@ void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainForm::DrawSwitchesButtonClick(TObject *Sender)
+{
+	Plan.DrawSwitches(Image1);
+}
+//---------------------------------------------------------------------------
+

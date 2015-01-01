@@ -43,6 +43,12 @@ void __fastcall TPlan::Draw(TImage * Image) {
 }
 
 //---------------------------------------------------------------------------
+void __fastcall TPlan::DrawSwitches(TImage * Image) {
+	Switches.Draw(Image, Scale, OriginX, OriginY);
+	return;
+}
+
+//---------------------------------------------------------------------------
 void __fastcall TPlan::SetMaxMin(void) {
 	Lines.SetMaxMin();
     Arcs.SetMaxMin();
