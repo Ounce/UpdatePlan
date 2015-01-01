@@ -55,3 +55,54 @@ void __fastcall TPlan::SetMaxMin(void) {
     return;
 }
 
+//---------------------------------------------------------------------------
+void __fastcall TPlan::DistinguishSwitches(void) {
+	int i, j;
+	TSwitch StartSwitch, EndSwitch;
+	Switches.clear();
+    for (i = 0; i < Lines.size(); i++) {
+    	if (Lines[i].StartSign && Lines[i].EndSign) continue;
+        StartSwitch.Lines.clear();
+		EndSwitch.Lines.clear();
+    	for (j = i + 1; j < Lines.size(); j++) {
+        	if (!Lines[i].StartSign) {
+	        	if (!Lines[j].StartSign && InRange(Lines[i].StartX, Lines[i].StartY, Lines[j].StartX, Lines[j].StartY, 1)) {
+					Lines[j].StartSign = true;
+        	    	StartSwitch.AddLine(lpSTART, &Lines[j]);
+				} else if (!Lines[j].EndSign && InRange(Lines[i].StartX, Lines[i].StartY, Lines[j].EndX, Lines[j].EndY, 1)) {
+					Lines[j].EndSign = true;
+	                StartSwitch.AddLine(lpEND, &Lines[j]);
+                }
+			} else if (!Lines[i].EndSign) {
+            	if (!Lines[j].StartSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].StartX, Lines[j].StartY, 1)) {
+					Lines[j].StartSign = true;
+                    EndSwitch.AddLine(lpSTART, &Lines[j]);
+				} else if (!Lines[j].EndSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].EndX, Lines[j].EndY, 1)) {
+                	Lines[j].EndSign = true;
+                    EndSwitch.AddLine(lpEND, &Lines[j]);
+                }
+            }
+        }
+		if (!StartSwitch.Lines.empty()) {
+			Lines[i].StartSign = true;
+			StartSwitch.AddLine(lpSTART, &Lines[i]);
+			Switches.push_back(StartSwitch);
+		}
+		if (!EndSwitch.Lines.empty()) {
+			Lines[i].EndSign = true;
+            EndSwitch.AddLine(lpEND, &Lines[i]);
+            Switches.push_back(EndSwitch);
+        }
+    }
+    return;
+}
+
+//---------------------------------------------------------------------------
+bool __fastcall TPlan::InRange(const double x, const double y, const double X, const double Y, const double R) {
+	double dx = X - x;
+    double dy = Y - y;
+    if (dx * dx + dy * dy < R * R)
+        return true;
+    else
+    	return false;
+}

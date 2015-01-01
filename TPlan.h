@@ -18,9 +18,11 @@ public:
     __fastcall TPlan();
     void __fastcall SetOrigin(TImage * Image);
     void __fastcall Clear(void);
+    void __fastcall DistinguishSwitches(void);
     void __fastcall Draw(TImage * Image);
 private:
 	double MaxX, MaxY, MinX, MinY, Width, Height;
     void __fastcall SetMaxMin(void);
+    bool __fastcall InRange(const double x, const double y, const double X, const double Y, const double R);
 };
 #endif

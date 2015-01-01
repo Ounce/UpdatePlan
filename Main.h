@@ -26,9 +26,11 @@ __published:	// IDE-managed Components
 	TImage *Image1;
 	TButton *DrawButton;
 	TButton *DistinguishButton;
+	TLabel *Label1;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
 	void __fastcall DrawButtonClick(TObject *Sender);
+	void __fastcall DistinguishButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	TPlan Plan;

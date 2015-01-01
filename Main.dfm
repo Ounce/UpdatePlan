@@ -17,6 +17,14 @@ object MainForm: TMainForm
     449)
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 368
+    Top = 428
+    Width = 31
+    Height = 13
+    Anchors = [akLeft, akBottom]
+    Caption = 'Label1'
+  end
   object PlanDataAdvStringGrid: TAdvStringGrid
     Left = 0
     Top = 0
@@ -111,7 +119,7 @@ object MainForm: TMainForm
       Left = 0
       Top = 0
       Width = 623
-      Height = 401
+      Height = 418
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       ExplicitHeight = 384
@@ -155,6 +163,7 @@ object MainForm: TMainForm
     Anchors = [akLeft, akBottom]
     Caption = #35782#21035
     TabOrder = 4
+    OnClick = DistinguishButtonClick
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'

@@ -69,3 +69,11 @@ void __fastcall TMainForm::DrawButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
+{
+	Plan.DistinguishSwitches();
+    Label1->Caption = Plan.Switches.size();
+    return;
+}
+//---------------------------------------------------------------------------
+
