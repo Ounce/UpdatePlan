@@ -41,9 +41,9 @@ void __fastcall Vector<T>::SetMaxMin(void) {
 		if (at(i).StartX < MinX) MinX = at(i).StartX;
         if (at(i).EndX < MinX) MinX = at(i).EndX;
     	if (at(i).StartY > MaxY) MaxY = at(i).StartY;
-        if (at(i).EndX > MaxY) MaxY = at(i).EndY;
-		if (at(i).StartX < MinY) MinY = at(i).StartY;
-        if (at(i).EndX < MinY) MinY = at(i).EndY;
+		if (at(i).EndY > MaxY) MaxY = at(i).EndY;
+		if (at(i).StartY < MinY) MinY = at(i).StartY;
+		if (at(i).EndY < MinY) MinY = at(i).EndY;
     }
     return;
 }

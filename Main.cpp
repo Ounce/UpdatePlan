@@ -30,6 +30,7 @@ void __fastcall TMainForm::OpenButtonClick(TObject *Sender)
 {
 	if (!ExcelOpenDialog->Execute()) return;
 	PlanDataAdvStringGrid->LoadFromXLSSheet(ExcelOpenDialog->FileName, L"Summary");
+	return;
 }
 
 //---------------------------------------------------------------------------
@@ -60,6 +61,8 @@ void __fastcall TMainForm::Import(void) {
     }
     return;
 }
+//---------------------------------------------------------------------------
+
 void __fastcall TMainForm::DrawButtonClick(TObject *Sender)
 {
 	Import();
@@ -80,6 +83,7 @@ void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
 void __fastcall TMainForm::DrawSwitchesButtonClick(TObject *Sender)
 {
 	Plan.DrawSwitches(Image1);
+	return;
 }
 //---------------------------------------------------------------------------
 
