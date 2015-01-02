@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = #25972#29702#24179#38754#22270#25968#25454
-  ClientHeight = 449
-  ClientWidth = 627
+  ClientHeight = 497
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,23 +13,24 @@ object MainForm: TMainForm
   OldCreateOrder = False
   WindowState = wsMaximized
   DesignSize = (
-    627
-    449)
+    610
+    497)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 208
-    Top = 428
+    Top = 476
     Width = 31
     Height = 13
     Anchors = [akLeft, akBottom]
     Caption = 'Label1'
+    ExplicitTop = 428
   end
   object PlanDataAdvStringGrid: TAdvStringGrid
     Left = 0
     Top = 0
-    Width = 627
-    Height = 377
+    Width = 610
+    Height = 370
     Cursor = crDefault
     Align = alTop
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -115,65 +116,80 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
+    ExplicitHeight = 401
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 623
-      Height = 452
+      Width = 606
+      Height = 363
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
-      ExplicitHeight = 384
     end
   end
   object OpenButton: TButton
     Left = 8
-    Top = 397
+    Top = 445
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #25171#24320
     TabOrder = 1
     OnClick = OpenButtonClick
+    ExplicitTop = 397
   end
   object CloseButton: TButton
     Left = 517
-    Top = 392
+    Top = 440
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #20851#38381
     TabOrder = 2
     OnClick = CloseButtonClick
+    ExplicitTop = 392
   end
   object DrawButton: TButton
     Left = 104
-    Top = 397
+    Top = 445
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #32472#22270
     TabOrder = 3
     OnClick = DrawButtonClick
+    ExplicitTop = 397
   end
   object DistinguishButton: TButton
     Left = 208
-    Top = 397
+    Top = 445
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #35782#21035
     TabOrder = 4
     OnClick = DistinguishButtonClick
+    ExplicitTop = 397
   end
   object DrawSwitchesButton: TButton
     Left = 305
-    Top = 397
+    Top = 445
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #32472#21046#36947#23700
     TabOrder = 5
     OnClick = DrawSwitchesButtonClick
+    ExplicitTop = 397
+  end
+  object ListBox1: TListBox
+    Left = 390
+    Top = 399
+    Width = 121
+    Height = 97
+    Anchors = [akLeft, akBottom]
+    ItemHeight = 13
+    TabOrder = 6
+    OnClick = ListBox1Click
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'
