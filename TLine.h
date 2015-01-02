@@ -9,7 +9,8 @@
 class TLine {
 public:
 	double StartX, StartY, EndX, EndY, Length;
-    bool StartSign, EndSign;
+	bool StartSign, EndSign;
+	__fastcall TLine();
     void __fastcall ClearSign(void);
     void __fastcall Draw(TImage * Image, double Scale, double OriginX, double OriginY);
 };

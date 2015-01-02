@@ -6,10 +6,16 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+__fastcall TLine::TLine() {
+	StartSign = false;
+	EndSign = false;
+}
+//---------------------------------------------------------------------------
+
 void __fastcall TLine::ClearSign(void) {
 	StartSign = false;
-    EndSign = false;
-    return;
+	EndSign = false;
+	return;
 }
 //---------------------------------------------------------------------------
 

@@ -69,7 +69,7 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 	for (i = 0; i < Lines.size(); i++) {
 		if (Lines[i].Length < 5) continue;
 		if (Lines[i].StartSign && Lines[i].EndSign) continue;
-        StartSwitch.Lines.clear();
+		StartSwitch.Lines.clear();
 		EndSwitch.Lines.clear();
 		for (j = i + 1; j < Lines.size(); j++) {
 			if (Lines[j].Length < 5)continue;
@@ -81,12 +81,13 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 					Lines[j].EndSign = true;
 	                StartSwitch.AddLine(lpEND, &Lines[j]);
                 }
-			} else if (!Lines[i].EndSign) {
+			}
+			if (!Lines[i].EndSign) {
             	if (!Lines[j].StartSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].StartX, Lines[j].StartY, 1)) {
 					Lines[j].StartSign = true;
                     EndSwitch.AddLine(lpSTART, &Lines[j]);
 				} else if (!Lines[j].EndSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].EndX, Lines[j].EndY, 1)) {
-                	Lines[j].EndSign = true;
+					Lines[j].EndSign = true;
                     EndSwitch.AddLine(lpEND, &Lines[j]);
                 }
             }
