@@ -43,7 +43,8 @@ void __fastcall TMainForm::Import(void) {
         	Line.StartX = PlanDataAdvStringGrid->Floats[17][i];
             Line.StartY = PlanDataAdvStringGrid->Floats[18][i];
             Line.EndX = PlanDataAdvStringGrid->Floats[13][i];
-            Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
+			Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
+			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
             Plan.Lines.push_back(Line);
         }
         if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {

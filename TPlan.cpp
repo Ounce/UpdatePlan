@@ -66,12 +66,14 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 	int i, j;
 	TSwitch StartSwitch, EndSwitch;
 	Switches.clear();
-    for (i = 0; i < Lines.size(); i++) {
-    	if (Lines[i].StartSign && Lines[i].EndSign) continue;
+	for (i = 0; i < Lines.size(); i++) {
+		if (Lines[i].Length < 5) continue;
+		if (Lines[i].StartSign && Lines[i].EndSign) continue;
         StartSwitch.Lines.clear();
 		EndSwitch.Lines.clear();
-    	for (j = i + 1; j < Lines.size(); j++) {
-        	if (!Lines[i].StartSign) {
+		for (j = i + 1; j < Lines.size(); j++) {
+			if (Lines[j].Length < 5)continue;
+			if (!Lines[i].StartSign) {
 	        	if (!Lines[j].StartSign && InRange(Lines[i].StartX, Lines[i].StartY, Lines[j].StartX, Lines[j].StartY, 1)) {
 					Lines[j].StartSign = true;
         	    	StartSwitch.AddLine(lpSTART, &Lines[j]);
