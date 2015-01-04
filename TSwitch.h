@@ -6,7 +6,7 @@
 #include "TLine.h"
 
 //---------------------------------------------------------------------------
-enum eLinePos {lpSTART, lpMiddle, lpEND };
+enum eLinePos {lpNONE, lpSTART, lpMIDDLE, lpEND };
 
 class TSwitchLine {
 public:

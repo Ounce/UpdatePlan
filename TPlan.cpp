@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+ï»¿//---------------------------------------------------------------------------
 
 #pragma hdrstop
 
@@ -22,7 +22,7 @@ void __fastcall TPlan::SetOrigin(TImage * Image) {
 	SetMaxMin();
     double s1 = Image->Width / Width;
     double s2 = Image->Height / Height;
-    if (s1 < s2) {	//Í¼µÄX·½Ïò´óÓÚY·½Ïò£¬¼´³¤¶È´óÓÚ¸ß¶È¡£
+    if (s1 < s2) {	//å›¾çš„Xæ–¹å‘å¤§äºŽYæ–¹å‘ï¼Œå³é•¿åº¦å¤§äºŽé«˜åº¦ã€‚
     	Scale = s1;
         OriginX = MinX;
         OriginY = MinY - (Image->Height / Scale - Height) * 0.5;
@@ -64,6 +64,7 @@ void __fastcall TPlan::SetMaxMin(void) {
 //---------------------------------------------------------------------------
 void __fastcall TPlan::DistinguishSwitches(void) {
 	int i, j;
+	eLinePos lp;
 	TSwitch StartSwitch, EndSwitch;
 	Switches.clear();
 	for (i = 0; i < Lines.size(); i++) {
@@ -74,22 +75,42 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 		for (j = i + 1; j < Lines.size(); j++) {
 			if (Lines[j].Length < 5)continue;
 			if (!Lines[i].StartSign) {
-	        	if (!Lines[j].StartSign && InRange(Lines[i].StartX, Lines[i].StartY, Lines[j].StartX, Lines[j].StartY, 1)) {
-					Lines[j].StartSign = true;
-        	    	StartSwitch.AddLine(lpSTART, &Lines[j]);
-				} else if (!Lines[j].EndSign && InRange(Lines[i].StartX, Lines[i].StartY, Lines[j].EndX, Lines[j].EndY, 1)) {
-					Lines[j].EndSign = true;
-	                StartSwitch.AddLine(lpEND, &Lines[j]);
-                }
+				lp = OnLine(Lines[i].StartX, Lines[i].StartY, &Lines[j]);
+				switch (lp) {
+					case lpSTART:
+						Lines[j].StartSign = true;
+						StartSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpMIDDLE:
+						StartSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpEND:
+						Lines[j].EndSign = true;
+						StartSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpNONE:
+					default:
+					;
+				}
 			}
 			if (!Lines[i].EndSign) {
-            	if (!Lines[j].StartSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].StartX, Lines[j].StartY, 1)) {
-					Lines[j].StartSign = true;
-                    EndSwitch.AddLine(lpSTART, &Lines[j]);
-				} else if (!Lines[j].EndSign && InRange(Lines[i].EndX, Lines[i].EndY, Lines[j].EndX, Lines[j].EndY, 1)) {
-					Lines[j].EndSign = true;
-                    EndSwitch.AddLine(lpEND, &Lines[j]);
-                }
+				lp = OnLine(Lines[i].EndX, Lines[i].EndY, &Lines[j]);
+ 				switch (lp) {
+					case lpSTART:
+						Lines[j].StartSign = true;
+						EndSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpMIDDLE:
+						EndSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpEND:
+						Lines[j].EndSign = true;
+						EndSwitch.AddLine(lp, &Lines[j]);
+						break;
+					case lpNONE:
+					default:
+					;
+				}
             }
         }
 		if (!StartSwitch.Lines.empty()) {
@@ -114,4 +135,23 @@ bool __fastcall TPlan::InRange(const double x, const double y, const double X, c
         return true;
     else
     	return false;
+}
+
+//---------------------------------------------------------------------------
+eLinePos __fastcall TPlan::OnLine(const double x, const double y, TLine * Line) {
+	if (Line->Length < 5) return false;
+	double xa = Line->EndX - Line->StartX;
+	double ya = Line->EndY - Line->StartY;
+	double xb = x - Line->StartX;
+	double yb = y - Line->StartY;
+	if (fabs(xa * yb - xb * ya) < 1 && min(Line->StartX, Line->EndX) <= x && x <= max(Line->StartX, Line->EndX) && min(Line->StartY, Line->EndY) <= y && y <= max(Line->StartY, Line->EndY)) {
+		if (InRange(x, y, Line->StartX, Line->StartY, 1))
+			return lpSTART;
+		else if (InRange(x, y, Line->EndX, Line->EndY, 1))
+			return lpEND;
+		else
+			return lpMIDDLE;
+
+	} else
+		return lpNONE;
 }
