@@ -67,7 +67,7 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 	eLinePos lp;
 	TSwitch StartSwitch, EndSwitch;
 	Switches.clear();
-	for (i = 0; i < Lines.size(); i++) {
+	for (i = 0; i < Lines.size(); i++) {    //判断线段与线段的连接。
 		if (Lines[i].Length < 5) continue;
 		if (Lines[i].StartSign && Lines[i].EndSign) continue;
 		StartSwitch.Lines.clear();
@@ -115,13 +115,26 @@ void __fastcall TPlan::DistinguishSwitches(void) {
         }
 		if (!StartSwitch.Lines.empty()) {
 			Lines[i].StartSign = true;
+            StartSwitch.X = Lines[i].StartX;
+            StartSwitch.Y = Lines[i].StartY;
 			StartSwitch.AddLine(lpSTART, &Lines[i]);
 			Switches.push_back(StartSwitch);
 		}
 		if (!EndSwitch.Lines.empty()) {
 			Lines[i].EndSign = true;
+            EndSwitch.X = Lines[i].EndX;
+            EndSwitch.Y = Lines[i].EndY;
             EndSwitch.AddLine(lpEND, &Lines[i]);
             Switches.push_back(EndSwitch);
+        }
+    }
+
+    //删除非道岔
+    for (i = 0; i < Switches.size(); i++) {
+        if (Switches[i].Lines.size() == 2) {
+            if (Switches[i].Lines[0].Pos != lpMIDDLE &&Switches[i].Lines[1].Pos != lpMIDDLE) {
+                Switches.erase(Switches.begin() + i);
+            }
         }
     }
     return;
