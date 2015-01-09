@@ -43,8 +43,8 @@ void __fastcall TPlan::Draw(TImage * Image) {
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TPlan::DrawSwitches(TImage * Image) {
-	Switches.Draw(Image, Scale, OriginX, OriginY);
+void __fastcall TPlan::DrawCrosses(TImage * Image) {
+	Crosses.Draw(Image, Scale, OriginX, OriginY);
 	return;
 }
 
@@ -65,13 +65,13 @@ void __fastcall TPlan::SetMaxMin(void) {
 void __fastcall TPlan::DistinguishSwitches(void) {
 	int i, j;
 	eLinePos lp;
-	TSwitch StartSwitch, EndSwitch;
-	Switches.clear();
+	TCross StartCross, EndCross;
+	Crosses.clear();
 	for (i = 0; i < Lines.size(); i++) {    //判断线段与线段的连接。
 		if (Lines[i].Length < 5) continue;
 		if (Lines[i].StartSign && Lines[i].EndSign) continue;
-		StartSwitch.Lines.clear();
-		EndSwitch.Lines.clear();
+		StartCross.Lines.clear();
+		EndCross.Lines.clear();
 		for (j = i + 1; j < Lines.size(); j++) {
 			if (Lines[j].Length < 5)continue;
 			if (!Lines[i].StartSign) {
@@ -79,14 +79,14 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 				switch (lp) {
 					case lpSTART:
 						Lines[j].StartSign = true;
-						StartSwitch.AddLine(lp, &Lines[j]);
+						StartCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpMIDDLE:
-						StartSwitch.AddLine(lp, &Lines[j]);
+						StartCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpEND:
 						Lines[j].EndSign = true;
-						StartSwitch.AddLine(lp, &Lines[j]);
+						StartCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpNONE:
 					default:
@@ -98,14 +98,14 @@ void __fastcall TPlan::DistinguishSwitches(void) {
  				switch (lp) {
 					case lpSTART:
 						Lines[j].StartSign = true;
-						EndSwitch.AddLine(lp, &Lines[j]);
+						EndCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpMIDDLE:
-						EndSwitch.AddLine(lp, &Lines[j]);
+						EndCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpEND:
 						Lines[j].EndSign = true;
-						EndSwitch.AddLine(lp, &Lines[j]);
+						EndCross.AddLine(lp, &Lines[j]);
 						break;
 					case lpNONE:
 					default:
@@ -113,27 +113,27 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 				}
             }
         }
-		if (!StartSwitch.Lines.empty()) {
+		if (!StartCross.Lines.empty()) {
 			Lines[i].StartSign = true;
-            StartSwitch.X = Lines[i].StartX;
-            StartSwitch.Y = Lines[i].StartY;
-			StartSwitch.AddLine(lpSTART, &Lines[i]);
-			Switches.push_back(StartSwitch);
+            StartCross.X = Lines[i].StartX;
+            StartCross.Y = Lines[i].StartY;
+			StartCross.AddLine(lpSTART, &Lines[i]);
+			Crosses.push_back(StartCross);
 		}
-		if (!EndSwitch.Lines.empty()) {
+		if (!EndCross.Lines.empty()) {
 			Lines[i].EndSign = true;
-            EndSwitch.X = Lines[i].EndX;
-            EndSwitch.Y = Lines[i].EndY;
-            EndSwitch.AddLine(lpEND, &Lines[i]);
-            Switches.push_back(EndSwitch);
+            EndCross.X = Lines[i].EndX;
+            EndCross.Y = Lines[i].EndY;
+            EndCross.AddLine(lpEND, &Lines[i]);
+            Crosses.push_back(EndCross);
         }
     }
 
     //删除非道岔
-    for (i = 0; i < Switches.size(); i++) {
-        if (Switches[i].Lines.size() == 2) {
-            if (Switches[i].Lines[0].Pos != lpMIDDLE &&Switches[i].Lines[1].Pos != lpMIDDLE) {
-                Switches.erase(Switches.begin() + i);
+    for (i = 0; i < Crosses.size(); i++) {
+        if (Crosses[i].Lines.size() == 2) {
+            if (Crosses[i].Lines[0].Pos != lpMIDDLE && Crosses[i].Lines[1].Pos != lpMIDDLE) {
+                Crosses.erase(Crosses.begin() + i);
             }
         }
     }

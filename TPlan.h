@@ -7,7 +7,7 @@
 #include "Comm.h"
 #include "TArc.h"
 #include "TLine.h"
-#include "TSwitch.h"
+#include "TCross.h"
 
 class TPlan {
 public:
@@ -15,7 +15,7 @@ public:
     double Scale;
 	TArcs Arcs;
     TLines Lines;
-    TSwitches Switches;
+    TCrosses Crosses;
     __fastcall TPlan();
     void __fastcall SetOrigin(TImage * Image);
     void __fastcall Clear(void);

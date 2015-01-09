@@ -108,6 +108,10 @@
 				<DependentOn>TArc.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="TCross.cpp">
+				<DependentOn>TCross.h</DependentOn>
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="TLine.cpp">
 				<DependentOn>TLine.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
@@ -115,10 +119,6 @@
 			<CppCompile Include="TPlan.cpp">
 				<DependentOn>TPlan.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="TSwitch.cpp">
-				<DependentOn>TSwitch.h</DependentOn>
-				<BuildOrder>6</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="TVector.cpp">
 				<DependentOn>TVector.h</DependentOn>

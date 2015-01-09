@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef TSwitchH
-#define TSwitchH
+#ifndef TCrossH
+#define TCrossH
 
 #include "Comm.h"
 #include "TLine.h"
@@ -9,49 +9,51 @@
 //---------------------------------------------------------------------------
 enum eLinePos {lpNONE, lpSTART, lpMIDDLE, lpEND };
 enum eLineType {ltUNKNOW, ltMAIN, ltBRANCH};
-enum eSwitchType {Symmetry = 0,	//单开对称道岔
+enum eCrossType {Symmetry = 0,	//单开对称道岔
                   SimpleLeft,				//左开单开道岔
                   SimpleRight,				//右开单开道岔
 				  Treble,			//三开对称道岔
                   DiamondCrossing};		//菱形交叉
 
 //---------------------------------------------------------------------------
-class SwitchAngle {
+class CrossAngle {
 public:
 	double Angle;
     int FrogNumber;
 };
 
 //---------------------------------------------------------------------------
-class SwitchAngleList : public vector<SwitchAngle> {
+class CrossAngleList : public vector<CrossAngle> {
 public:
-	__fastcall SwitchAngleList();
+	__fastcall CrossAngleList();
 };
 
 //---------------------------------------------------------------------------
-class TSwitchLine {
+class TCrossLine {
 public:
 	eLinePos Pos;
     eLineType Type;
+    double Angle
+private:
     TLine * ptr;
 };
 
 //---------------------------------------------------------------------------
-class TSwitch {
+class TCrosss {
 public:
 	double X, Y;
     double MinAngle, MaxAngle;
     int MinAngleA, MinAngleB, MaxAngleA, MaxAngleB;
     int FrogNumber, MainLineNumber;
     eSwitchType Type;
-    vector<TSwitchLine> Lines;
+    vector<TCrossLine> Lines;
 	void __fastcall AddLine(eLinePos Pos, TLine * Line);
     void __fastcall UpdateAngle(void);
 	void __fastcall Draw(TImage * Image, const double Scale, const double OriginX, const double OriginY);
 };
 
 //---------------------------------------------------------------------------
-class TSwitches : public vector<TSwitch> {
+class TCrosses : public vector<TCross> {
 public:
 	void __fastcall Draw(TImage * Image, const double Scale, const double OriginX, const double OriginY);
 };
