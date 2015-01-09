@@ -94,6 +94,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="Comm.cpp">
+				<DependentOn>Comm.h</DependentOn>
+				<BuildOrder>7</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="Main.cpp">
 				<Form>MainForm</Form>
 				<FormType>dfm</FormType>

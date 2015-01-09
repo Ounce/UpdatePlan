@@ -116,14 +116,14 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
-    ExplicitHeight = 401
     object Image1: TImage
       Left = 0
       Top = 0
       Width = 606
-      Height = 363
+      Height = 380
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
+      ExplicitHeight = 363
     end
   end
   object OpenButton: TButton
@@ -135,7 +135,6 @@ object MainForm: TMainForm
     Caption = #25171#24320
     TabOrder = 1
     OnClick = OpenButtonClick
-    ExplicitTop = 397
   end
   object CloseButton: TButton
     Left = 517
@@ -146,7 +145,6 @@ object MainForm: TMainForm
     Caption = #20851#38381
     TabOrder = 2
     OnClick = CloseButtonClick
-    ExplicitTop = 392
   end
   object DrawButton: TButton
     Left = 104
@@ -157,7 +155,6 @@ object MainForm: TMainForm
     Caption = #32472#22270
     TabOrder = 3
     OnClick = DrawButtonClick
-    ExplicitTop = 397
   end
   object DistinguishButton: TButton
     Left = 208
@@ -168,7 +165,6 @@ object MainForm: TMainForm
     Caption = #35782#21035
     TabOrder = 4
     OnClick = DistinguishButtonClick
-    ExplicitTop = 397
   end
   object DrawSwitchesButton: TButton
     Left = 305
@@ -179,7 +175,6 @@ object MainForm: TMainForm
     Caption = #32472#21046#36947#23700
     TabOrder = 5
     OnClick = DrawSwitchesButtonClick
-    ExplicitTop = 397
   end
   object ListBox1: TListBox
     Left = 390
@@ -187,6 +182,7 @@ object MainForm: TMainForm
     Width = 121
     Height = 97
     Anchors = [akLeft, akBottom]
+    ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
     ItemHeight = 13
     TabOrder = 6
     OnClick = ListBox1Click

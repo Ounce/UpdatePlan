@@ -8,7 +8,7 @@
 
 class TLine {
 public:
-	double StartX, StartY, EndX, EndY, Length;
+	double StartX, StartY, EndX, EndY, Length, StartAngle, Angle;
 	bool StartSign, EndSign;
 	__fastcall TLine();
     void __fastcall ClearSign(void);

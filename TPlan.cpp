@@ -141,16 +141,6 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 }
 
 //---------------------------------------------------------------------------
-bool __fastcall TPlan::InRange(const double x, const double y, const double X, const double Y, const double R) {
-	double dx = X - x;
-    double dy = Y - y;
-    if (dx * dx + dy * dy < R * R)
-        return true;
-    else
-    	return false;
-}
-
-//---------------------------------------------------------------------------
 eLinePos __fastcall TPlan::OnLine(const double x, const double y, TLine * Line) {
 	if (Line->Length < 5) return false;
 	double xa = Line->EndX - Line->StartX;

@@ -4,6 +4,7 @@
 #define TPlanH
 //---------------------------------------------------------------------------
 
+#include "Comm.h"
 #include "TArc.h"
 #include "TLine.h"
 #include "TSwitch.h"
@@ -24,7 +25,6 @@ public:
 private:
 	double MaxX, MaxY, MinX, MinY, Width, Height;
     void __fastcall SetMaxMin(void);
-	bool __fastcall InRange(const double x, const double y, const double X, const double Y, const double R);
 	eLinePos __fastcall OnLine(const double x, const double y, TLine * Line);
 };
 #endif

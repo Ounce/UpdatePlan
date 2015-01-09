@@ -45,6 +45,7 @@ void __fastcall TMainForm::Import(void) {
             Line.EndX = PlanDataAdvStringGrid->Floats[13][i];
 			Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
 			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
+            Line.StartAngle = PlanDataAdvStringGrid->Floats[16][i];
             Plan.Lines.push_back(Line);
         }
         if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {
