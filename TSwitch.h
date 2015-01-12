@@ -137,12 +137,11 @@ class TSwitchList : public vector<TSwitch>
 {
 public:
    __fastcall TSwitchList();
-//   TSwitchList & __fastcall operator = (const TSwitchList & List);
 	TSwitch __fastcall Which(const WideString ModelName);
 	TSwitch __fastcall Which(const unsigned short ModelIndex);
 	unsigned short __fastcall Index(const WideString ModelName);
 	WideString __fastcall Model(const unsigned short Index);
-//    TSwitch __fastcall Model(const unsigned short Index);
+    TSwitch __fastcall GetSwitch(const double FrogAngle, eSwitchType SwitchType);
 private:
 	TSwitch __fastcall New(const unsigned short ModelIndex, const WideString ModelName,
 								  const float FrogNumber, const float a, const float b,

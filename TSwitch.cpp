@@ -353,7 +353,16 @@ TSwitch __fastcall TSwitchList::Which(const unsigned short ModelIndex)
 	}
 	return at(0);
 }
+//---------------------------------------------------------------------------
 
+TSwitch __fastcall TSwitchList::GetSwitch(const double FrogAngle, eSwitchType SwitchType) {
+	for (int i = 0; i < size(); i++) {
+        if (at(i).Angle == FrogAngle && at(i).Type == SwitchType) {
+            return at(i);
+        }
+    }
+    return at(0);
+}
 //---------------------------------------------------------------------------
 unsigned short __fastcall TSwitchList::Index(const WideString ModelName)
 {
