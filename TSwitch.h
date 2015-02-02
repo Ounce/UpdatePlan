@@ -20,7 +20,8 @@ enum eSwitchHandType {shtSTRAIGHT,	//直向
                       shtLEFTBACKWARD,	//左反向（菱形交叉使用）
                       shtRIGHTBACKWARD};	//右反向
 enum eSwitchDirection {sdBACKWARD, sdFORWARD};     //逆向、 顺向
-enum eSwitchType {Symmetry = 0,	//单开对称道岔
+enum eSwitchType {NoSwitch = -1,
+                  Symmetry = 0,	//单开对称道岔
                   SimpleLeft,				//左开单开道岔
                   SimpleRight,				//右开单开道岔
 				  Treble,			//三开对称道岔

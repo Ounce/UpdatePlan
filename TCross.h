@@ -5,15 +5,11 @@
 
 #include "Comm.h"
 #include "TLine.h"
+#include "TSwitch.h"
 
 //---------------------------------------------------------------------------
 enum eLinePos {lpNONE, lpSTART, lpMIDDLE, lpEND };
 enum eLineType {ltUNKNOW, ltMAIN, ltBRANCH};
-enum eCrossType {Symmetry = 0,	//单开对称道岔
-                  SimpleLeft,				//左开单开道岔
-                  SimpleRight,				//右开单开道岔
-				  Treble,			//三开对称道岔
-                  DiamondCrossing};		//菱形交叉
 
 //---------------------------------------------------------------------------
 class CrossAngle {
@@ -29,17 +25,17 @@ public:
 };
 
 //---------------------------------------------------------------------------
-class TCrossLine {
+class TCrossLine : public TLine {
 public:
 	eLinePos Pos;
-    eLineType Type;
-    double Angle
-private:
     TLine * ptr;
+    eLineType Type;
+    TCrossLine & __fastcall operator = (TLine * Line);
+private:
 };
 
 //---------------------------------------------------------------------------
-class TCrosss {
+class TCross {
 public:
 	double X, Y;
     double MinAngle, MaxAngle;
@@ -50,6 +46,8 @@ public:
 	void __fastcall AddLine(eLinePos Pos, TLine * Line);
     void __fastcall UpdateAngle(void);
 	void __fastcall Draw(TImage * Image, const double Scale, const double OriginX, const double OriginY);
+private:
+	void __fastcall SetSimpleSwitchType(const eBranchSide BranchSide);
 };
 
 //---------------------------------------------------------------------------

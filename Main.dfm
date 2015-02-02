@@ -120,7 +120,7 @@ object MainForm: TMainForm
       Left = 0
       Top = 0
       Width = 606
-      Height = 380
+      Height = 397
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       ExplicitHeight = 363
@@ -178,7 +178,7 @@ object MainForm: TMainForm
   end
   object ListBox1: TListBox
     Left = 390
-    Top = 399
+    Top = 392
     Width = 121
     Height = 97
     Anchors = [akLeft, akBottom]

@@ -130,7 +130,7 @@ void __fastcall TPlan::DistinguishSwitches(void) {
     }
 
     //删除非道岔
-    for (i = 0; i < Crosses.size(); i++) {
+    for (i = Crosses.size() - 1; i > -1 ; i--) {
         if (Crosses[i].Lines.size() == 2) {
             if (Crosses[i].Lines[0].Pos != lpMIDDLE && Crosses[i].Lines[1].Pos != lpMIDDLE) {
                 Crosses.erase(Crosses.begin() + i);
