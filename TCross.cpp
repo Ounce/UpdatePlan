@@ -40,6 +40,21 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
 }
 
 //---------------------------------------------------------------------------
+TCrossLine & __fastcall operator = (const TCrossLine & CrossLine) {
+	StartX = CrossLine.StartX;
+    StartY = CrossLine.StartY;
+    EndX = CrossLine.EndX;
+    EndY = CrossLine.EndY;
+    Length = CrossLine.Length;
+    StartAngle = CrossLine.StartAngle;
+	Angle = CrossLine.Angle;
+    StartSign = CrossLine.StartSign;
+    EndSign = CrossLine.EndSign;
+    ptr = CrossLine.ptr;
+    return *this;
+}
+
+//---------------------------------------------------------------------------
 void __fastcall TCross::AddLine(eLinePos Pos, TLine * Line) {
     TCrossLine sl;
     sl = Line;
@@ -54,9 +69,16 @@ void __fastcall TCross::UpdateAngle(void) {
     double a = 90;
     CrossAngleList AngleList;     //в╙уч╫гап╠М
     TSwitchList SwitchList;
+    TCrossLine CL;
     int BranchLineNumber = -1;
     MainLineNumber = -1;
     eBranchSide BranchSide;
+    for (i = 0; i < Lines.size(); i++) {
+        if (Lines[i].Pos == lpMIDDLE) {
+        	CL = Lines[i];
+
+        }
+    }
 	for (i = 0; i < Lines.size(); i++) {
 		if (InRange(X, Y, Lines[i].ptr->StartX, Lines[i].ptr->StartY, 1)) {
             Lines[i].ptr->Angle = Lines[i].ptr->StartAngle;

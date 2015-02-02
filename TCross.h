@@ -31,6 +31,7 @@ public:
     TLine * ptr;
     eLineType Type;
     TCrossLine & __fastcall operator = (TLine * Line);
+    TCrossLine & __fastcall operator = (const TCrossLine & CrossLine);
 private:
 };
 
