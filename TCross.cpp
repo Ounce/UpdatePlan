@@ -40,7 +40,7 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
 }
 
 //---------------------------------------------------------------------------
-TCrossLine & __fastcall operator = (const TCrossLine & CrossLine) {
+TCrossLine & __fastcall TCrossLine::operator = (const TCrossLine & CrossLine) {
 	StartX = CrossLine.StartX;
     StartY = CrossLine.StartY;
     EndX = CrossLine.EndX;
@@ -73,10 +73,16 @@ void __fastcall TCross::UpdateAngle(void) {
     int BranchLineNumber = -1;
     MainLineNumber = -1;
     eBranchSide BranchSide;
-    for (i = 0; i < Lines.size(); i++) {
+    for (i = 0; i < Lines.size(); i++) {          // 拆分lpMIDDLE的线段
         if (Lines[i].Pos == lpMIDDLE) {
         	CL = Lines[i];
-
+            Lines[i].EndX = X;
+            Lines[i].EndY = Y;
+            Lines[i].Pos = lpEND;
+            CL.StartX = X;
+            CL.StartY = Y;
+            CL.Pos = lpSTART;
+            Lines.push_back(CL); //拆分后的线段没有lpMIDDLE的，因而不必再检查。
         }
     }
 	for (i = 0; i < Lines.size(); i++) {
@@ -145,7 +151,7 @@ void __fastcall TCross::UpdateAngle(void) {
                 	BranchSide = GetBranchSide(Lines[MainLineNumber].Angle, Lines[MinAngleB].Angle);
             		SetSimpleSwitchType(BranchSide);
                 }
-            } else if (Lines[MaxAngleA].ptr->pos == lpMIDDLE || Lines[MaxAngleB].ptr->pos == lpMIDDLE) {
+            } else if (Lines[MaxAngleA].ptr->Pos == lpMIDDLE || Lines[MaxAngleB].ptr->pos == lpMIDDLE) {
             	Type = Treble;
             } else {
                 Type = Symmetry;
