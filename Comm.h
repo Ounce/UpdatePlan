@@ -6,7 +6,7 @@
 #include <math.h>
 //---------------------------------------------------------------------------
 
-enum eBranchSide {bsUNKNOW, bsLEFT, bsRIGHT, bsSTRAIGHT, bsMAIN};        //bsMAIN —— 主分支。
+enum eBranchSide {bsMAIN = 1, bsLEFT = 2, bsSTRAIGHT = 4, bsRIGHT = 8, bsUNKNOW = 128};        //bsMAIN —— 主分支。
 
 bool __fastcall InRange(const double x, const double y, const double X, const double Y, const double R) {
 	double dx = X - x;
@@ -47,7 +47,8 @@ bool __fastcall EqualAngle(const double AngleA, const double AngleB) {
 
 //---------------------------------------------------------------------------
 eBranchSide __fastcall GetBranchSide(const double MainAngle, const double BranchAngle) {
-	if (MainAngle == BranchAngle || MainAngle == OppositeAngle(MainAngle)) return bsSTRAIGHT;
+	if (MainAngle == BranchAngle) return bsMAIN;
+    if (MainAngle == OppositeAngle(MainAngle)) return bsSTRAIGHT;
     if (MainAngle > 180) {
         if (BranchAngle < MainAngle && BranchAngle > OppositeAngle(MainAngle)) return bsLEFT;
         else return bsRIGHT;

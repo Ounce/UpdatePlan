@@ -29,9 +29,15 @@ class TCrossLine : public TLine {
 public:
 	eLinePos Pos;
     TLine * ptr;
-    eLineType Type;
+    eBranchSide Type;
     TCrossLine & __fastcall operator = (TLine * Line);
     TCrossLine & __fastcall operator = (const TCrossLine & CrossLine);
+    bool __fastcall operator < (const TCrossLine & CrossLine) {
+    	return this->Angle < CrossLine.Angle;
+    };
+    bool __fastcall operator == (const TCrossLine & CrossLine) {
+        return this->Angle == CrossLine.Angle;
+    };
 private:
 };
 
@@ -42,12 +48,13 @@ public:
     double MinAngle, MaxAngle;
     int MinAngleA, MinAngleB, MaxAngleA, MaxAngleB;
     int FrogNumber, MainLineNumber;
-    eSwitchType Type;
+    eSwitch Type;
     vector<TCrossLine> Lines;
 	void __fastcall AddLine(eLinePos Pos, TLine * Line);
     void __fastcall UpdateAngle(void);
 	void __fastcall Draw(TImage * Image, const double Scale, const double OriginX, const double OriginY);
 private:
+	vector<TCrossLine>::iterator vi;
 	void __fastcall SetSimpleSwitchType(const eBranchSide BranchSide);
 };
 
