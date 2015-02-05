@@ -137,12 +137,20 @@ void __fastcall TPlan::DistinguishSwitches(void) {
             }
         }
     }
+    for (i = 0; i < Crosses.size(); i++) {
+        Crosses[i].UpdateAngle();
+    }                                              /*
+    for (i = Crosses.size() - 1; i > -1; i--) {
+        if (Crosses[i].Type == sNone) {
+            Crosses.erase(Crosses.begin() + i);
+        }
+    }                                       */
     return;
 }
 
 //---------------------------------------------------------------------------
 eLinePos __fastcall TPlan::OnLine(const double x, const double y, TLine * Line) {
-	if (Line->Length < 5) return false;
+	if (Line->Length < 5) return lpNONE;
 	double xa = Line->EndX - Line->StartX;
 	double ya = Line->EndY - Line->StartY;
 	double xb = x - Line->StartX;

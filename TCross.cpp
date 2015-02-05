@@ -33,7 +33,7 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
     EndY = Line->EndY;
     Length = Line->Length;
     StartAngle = Line->StartAngle;
-	Angle = Line->Angle;
+	Angle = StartAngle;
     StartSign = Line->StartSign;
     EndSign = Line->EndSign;
     ptr = Line;
@@ -51,6 +51,7 @@ TCrossLine & __fastcall TCrossLine::operator = (const TCrossLine & CrossLine) {
     StartSign = CrossLine.StartSign;
     EndSign = CrossLine.EndSign;
     ptr = CrossLine.ptr;
+    Pos = CrossLine.Pos;
     return *this;
 }
 
@@ -80,14 +81,14 @@ void __fastcall TCross::UpdateAngle(void) {
             Lines[i].EndX = X;
             Lines[i].EndY = Y;
             Lines[i].Pos = lpEND;
+            Lines[i].EndSign = true;
             CL.StartX = X;
             CL.StartY = Y;
             CL.Pos = lpSTART;
+            CL.StartSign = true;
             Lines.push_back(CL); //拆分后的线段没有lpMIDDLE的，因而不必再检查。
         }
     }
-    sort(Lines.begin(), Lines.end());                                     // 删除重复线段。
-    Lines.erase(unique(Lines.begin(), Lines.end()), Lines.end());
 	for (i = 0; i < Lines.size(); i++) {           // 设置各线段的角度。
 		if (InRange(X, Y, Lines[i].EndX, Lines[i].EndY, 1)) {
         	Lines[i].Angle = OppositeAngle(Lines[i].StartAngle);
@@ -95,6 +96,8 @@ void __fastcall TCross::UpdateAngle(void) {
 			Lines[i].Angle = Lines[i].StartAngle;
         }
     }
+    sort(Lines.begin(), Lines.end());                                     // 删除重复线段。
+    Lines.erase(unique(Lines.begin(), Lines.end()), Lines.end());
     MaxAngle = MinAngle = GetAngle(Lines[0].Angle, Lines[1].Angle);       //查找最大、最小角度，同时查找与其他线段夹角大于90°的线段，并设置为ltMAIN
     MaxAngleA = MaxAngleB = MinAngleA = MinAngleB = -1;
     int k = 0;
@@ -187,7 +190,7 @@ void __fastcall TCross::UpdateAngle(void) {
 //---------------------------------------------------------------------------
 void __fastcall TCross::Draw(TImage * Image, const double Scale, const double OriginX, const double OriginY) {
 	for (int i = 0; i < Lines.size(); i++) {
-		Lines[i].ptr->Draw(Image, Scale, OriginX, OriginY);
+		Lines[i].Draw(Image, Scale, OriginX, OriginY);
 	}
 	return;
 }
