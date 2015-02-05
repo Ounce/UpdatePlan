@@ -138,7 +138,7 @@ void __fastcall TCross::UpdateAngle(void) {
                 	Type = sSimpleLeft9;
                     break;
                 case 7:
-                	Type = sSimpleLedt7;
+                	Type = sSimpleLeft7;
                     break;
 	            default:
                 	Type = sNone;

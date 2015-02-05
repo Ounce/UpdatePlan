@@ -78,9 +78,9 @@ void __fastcall TMainForm::DrawButtonClick(TObject *Sender)
 void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
 {
 	Plan.DistinguishSwitches();
-	Label1->Caption = Plan.Switches.size();
-	for (int i = 0; i < Plan.Switches.size(); i++) {
-		ListBox1->Items->Add(IntToStr(i) + L" --- " + Plan.Switches[i].Lines.size());
+	Label1->Caption = Plan.Crosses.size();
+	for (int i = 0; i < Plan.Crosses.size(); i++) {
+		ListBox1->Items->Add(IntToStr(i) + L" --- " + Plan.Crosses[i].Lines.size());
 	}
 	return;
 }
@@ -88,7 +88,7 @@ void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
 
 void __fastcall TMainForm::DrawSwitchesButtonClick(TObject *Sender)
 {
-	Plan.DrawSwitches(Image1);
+	Plan.DrawCrosses(Image1);
 	return;
 }
 //---------------------------------------------------------------------------
@@ -96,7 +96,7 @@ void __fastcall TMainForm::DrawSwitchesButtonClick(TObject *Sender)
 void __fastcall TMainForm::ListBox1Click(TObject *Sender)
 {
 	Image1->Canvas->Pen->Color = clRed;
-	Plan.Switches[ListBox1->ItemIndex].Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
+	Plan.Crosses[ListBox1->ItemIndex].Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
 	return;
 }
 //---------------------------------------------------------------------------
