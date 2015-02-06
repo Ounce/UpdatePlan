@@ -125,13 +125,18 @@ void __fastcall TCross::UpdateAngle(void) {
         Lines[i].Type = GetBranchSide(Lines[MainLineNumber].Angle, Lines[i].Angle);
         SwitchType += Lines[i].Type;
     }
-    for (i = 0; i < AngleList.size(); i++) {          //根据最小角查找对应的辙岔号。
+    FrogNumber = -1;                                  //根据最小角查找对应的辙岔号。
+    for (i = 0; i < AngleList.size(); i++) {
         if (EqualAngle(MinAngle, AngleList[i].Angle)) {
         	FrogNumber = AngleList[i].FrogNumber;
             break;
         }
     }
-    switch (SwitchType) {
+    if (FrogNumber == -1) {
+        Type = sNone;
+        return;
+    }
+    switch (SwitchType) {                         // 确定道岔型号
         case 7:		// 左单开
         	switch (FrogNumber) {
                 case 6:
