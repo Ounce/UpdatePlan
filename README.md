@@ -7,7 +7,9 @@ UpdatePlan
 
 #流程
 
-导入AutoCAD数据。
+删除不必要的图形，并将车场后半部也一同删除，然后使用数据提取工具，将图形导出到一个EXCEL文件中；
+
+通过TMainForm::Import(void)函数，将AutoCAD的曲线和线段分别导入到TLines和TArcs数组中。
 
 判断线段交叉，并将这些交叉保存到一个TCrosses类中。
 
@@ -16,6 +18,8 @@ UpdatePlan
 更新这些交叉中的线段的角度。
 
 删除一些角度不符合道岔数据的交叉。
+
+
 
 #AutoCAD平面图的要求
 

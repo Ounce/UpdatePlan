@@ -136,12 +136,10 @@ void __fastcall TPlan::DistinguishSwitches(void) {
                 Crosses.erase(Crosses.begin() + i);
             }
         }
-    }
-    for (i = 0; i < Crosses.size(); i++) {
-        Crosses[i].UpdateAngle();
-    }
-    for (i = Crosses.size() - 1; i > -1; i--) {
-        if (Crosses[i].Type == sNone) {
+	}
+	for (i = Crosses.size() - 1; i > -1; i--) {
+		Crosses[i].UpdateAngle();
+		if (Crosses[i].Type == sNone) {
             Crosses.erase(Crosses.begin() + i);
         }
     }

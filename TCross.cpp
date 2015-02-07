@@ -36,7 +36,8 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
 	Angle = StartAngle;
     StartSign = Line->StartSign;
     EndSign = Line->EndSign;
-    ptr = Line;
+	ptr = Line;
+	return *this;
 }
 
 //---------------------------------------------------------------------------

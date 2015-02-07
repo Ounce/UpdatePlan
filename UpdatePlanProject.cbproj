@@ -112,9 +112,17 @@
 				<DependentOn>TCross.h</DependentOn>
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="TEntity.cpp">
+				<DependentOn>TEntity.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="TLine.cpp">
 				<DependentOn>TLine.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="TPath.cpp">
+				<DependentOn>TPath.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="TPlan.cpp">
 				<DependentOn>TPlan.h</DependentOn>
