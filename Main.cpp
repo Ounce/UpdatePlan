@@ -40,13 +40,21 @@ void __fastcall TMainForm::Import(void) {
     TArc Arc;
     for (int i = 1; i < PlanDataAdvStringGrid->RowCount; i++) {
 		if (PlanDataAdvStringGrid->Cells[1][i] == L"Ö±Ïß") {
-        	Line.StartX = PlanDataAdvStringGrid->Floats[17][i];
-            Line.StartY = PlanDataAdvStringGrid->Floats[18][i];
-            Line.EndX = PlanDataAdvStringGrid->Floats[13][i];
-			Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
+			if (PlanDataAdvString->Floats[17][i] > PlanDataAdvStringGrid->Floats[13][i]) {
+				Line.StartX = PlanDataAdvStringGrid->Floats[13][i];
+				Line.StartY = PlanDataAdvStringGrid->Floats[14][i];
+				Line.EndX = PlanDataAdvStringGrid->Floats[17][i];
+				Line.EndY = PlanDataAdvStringGrid->Floats[18][i];
+				Line.StartAngle = OppositeAngle(PlanDataAdvStringGrid->Floats[16][i]);
+			} else {
+				Line.StartX = PlanDataAdvStringGrid->Floats[17][i];
+				Line.StartY = PlanDataAdvStringGrid->Floats[18][i];
+				Line.EndX = PlanDataAdvStringGrid->Floats[13][i];
+				Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
+				Line.StartAngle = PlanDataAdvStringGrid->Floats[16][i];
+            }
 			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
-            Line.StartAngle = PlanDataAdvStringGrid->Floats[16][i];
-            Plan.Lines.push_back(Line);
+			Plan.Lines.push_back(Line);
         }
         if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {
             Arc.CenterX = PlanDataAdvStringGrid->Floats[6][i];
