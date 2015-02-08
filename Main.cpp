@@ -35,6 +35,7 @@ void __fastcall TMainForm::OpenButtonClick(TObject *Sender)
 
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::Import(void) {
+	float s;
 	Plan.Clear();
     TLine Line;
     TArc Arc;
@@ -65,7 +66,17 @@ void __fastcall TMainForm::Import(void) {
             Arc.StartX = Arc.CenterX + cos(Arc.StartAngle * 0.017453) * Arc.Radii;
             Arc.StartY = Arc.CenterY + sin(Arc.StartAngle * 0.017453) * Arc.Radii;
             Arc.EndX = Arc.CenterX + cos((Arc.StartAngle + Arc.SweepAngle) * 0.017453) * Arc.Radii;
-            Arc.EndY = Arc.CenterY + sin((Arc.StartAngle + Arc.SweepAngle) * 0.017453) * Arc.Radii;
+			Arc.EndY = Arc.CenterY + sin((Arc.StartAngle + Arc.SweepAngle) * 0.017453) * Arc.Radii;
+			if (Arc.StrartX > Arc.EndX) {
+				s = Arc.StartX;
+				Arc.StartX = Arc.EndX;
+				Arc.EndX = s;
+				s = Arc.StartY;
+				Arc.StartY = Arc.EndY;
+				Arc.EndY = s;
+				Arc.StartAngle += Arc.SweepAngle;
+				Arc.SweepAngle = -Arc.SweepAnele;
+			}
             Plan.Arcs.push_back(Arc);
         }
     }
