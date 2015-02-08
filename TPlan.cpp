@@ -175,6 +175,7 @@ void __fastcall TPlan::DistinguishPath(void) {
 	for (i = 0; i < TrackLines.size(); i++) {
 		TPath Path;
 		Path.push_back(TrackLines[i]);
+		Path.Angle = TrackLines[i].StartAngle;
 		Paths.push_back(Path);
 		p = Paths.size() - 1;
 		Next(p);
@@ -184,7 +185,7 @@ void __fastcall TPlan::DistinguishPath(void) {
 
 //---------------------------------------------------------------------------
 void __fastcall TPlan::Next(const int p) {
-	bool f;
+	bool f, fc;
 	TArc *A;
 	TLine *L;
 	TCross *C;
@@ -194,6 +195,7 @@ void __fastcall TPlan::Next(const int p) {
 		for (i = 0; i < Lines.size(); i++) {
 			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
 				Paths[p].push_back(&Lines[i]);
+				Paths[p].Angle = Lines[i].StartAngle;
 				Next(p);
 				return;
 			}
@@ -201,19 +203,26 @@ void __fastcall TPlan::Next(const int p) {
 		// 结束这个Path的识别
 	} else if (Paths[p][e].type() == typeid(TLine *)) {	// 线段可能连接 道岔、曲线和线段
 		L = boost::any_cast<TLine *>(Paths[p][e]);
+		fc = false;
 		for (i = 0; i < Crosses.size(); i++) {
-			if (OnLine(Crosses[i].X, Crosses[i].Y, L))
+			if (OnLine(Crosses[i].X, Crosses[i].Y, L)) {
 				if (Paths[p].FindCross(&Crosses[i]))
 					continue;           //如果已经存在就跳过。
 				else {
-					Paths[p].push_back(&Crosses[i]);
-					Next(p);
-					return;
+					Paths[p].push_back(&Crosses[i]);       // 线段可能有多个道岔。
+					Paths.push_back(Paths[p]);
+					fc = true;
 				}
+			}
+		}
+		if (fc) {
+			Next(p);
+			return;
 		}
 		for (i = 0; i < Arcs.size(); i++) {
 			if (InRange(L->StartX, L->StartY, Arcs[i].EndX, Arcs[i].EndY)) {
 				Paths[p].push_back(&Arcs[i]);
+				Paths[p].Angle = (Arcs[i].SweepAngle < 0) ? Arcs[i].StartAngle + 90 : Arcs[i].StartAngle + Arcs[i].SweepAngle - 90;
 				Next(p);
 				return;
 			}
@@ -221,6 +230,7 @@ void __fastcall TPlan::Next(const int p) {
 		for (i = 0; i < Lines.size(); i++) {
 			if (InRange(L->StartX, L->StartY, Lines[i].EndX, Lines[i].EndY)) {
 				Paths[p].push_back(&Lines[i]);
+				Paths[p].Angle = Lines[i].StartAngle;
 				Next(p);
 				return;
 			}
