@@ -41,7 +41,7 @@ void __fastcall TMainForm::Import(void) {
     TArc Arc;
     for (int i = 1; i < PlanDataAdvStringGrid->RowCount; i++) {
 		if (PlanDataAdvStringGrid->Cells[1][i] == L"Ö±Ïß") {
-			if (PlanDataAdvString->Floats[17][i] > PlanDataAdvStringGrid->Floats[13][i]) {
+			if (PlanDataAdvStringGrid->Floats[17][i] > PlanDataAdvStringGrid->Floats[13][i]) {
 				Line.StartX = PlanDataAdvStringGrid->Floats[13][i];
 				Line.StartY = PlanDataAdvStringGrid->Floats[14][i];
 				Line.EndX = PlanDataAdvStringGrid->Floats[17][i];
@@ -67,7 +67,7 @@ void __fastcall TMainForm::Import(void) {
             Arc.StartY = Arc.CenterY + sin(Arc.StartAngle * 0.017453) * Arc.Radii;
             Arc.EndX = Arc.CenterX + cos((Arc.StartAngle + Arc.SweepAngle) * 0.017453) * Arc.Radii;
 			Arc.EndY = Arc.CenterY + sin((Arc.StartAngle + Arc.SweepAngle) * 0.017453) * Arc.Radii;
-			if (Arc.StrartX > Arc.EndX) {
+			if (Arc.StartX > Arc.EndX) {
 				s = Arc.StartX;
 				Arc.StartX = Arc.EndX;
 				Arc.EndX = s;
@@ -75,7 +75,7 @@ void __fastcall TMainForm::Import(void) {
 				Arc.StartY = Arc.EndY;
 				Arc.EndY = s;
 				Arc.StartAngle += Arc.SweepAngle;
-				Arc.SweepAngle = -Arc.SweepAnele;
+				Arc.SweepAngle = -Arc.SweepAngle;
 			}
             Plan.Arcs.push_back(Arc);
         }
