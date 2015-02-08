@@ -131,19 +131,15 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 
     //删除非道岔
     for (i = Crosses.size() - 1; i > -1 ; i--) {
-        if (Crosses[i].Lines.size() == 2) {
-            if (Crosses[i].Lines[0].Pos != lpMIDDLE && Crosses[i].Lines[1].Pos != lpMIDDLE) {
-                Crosses.erase(Crosses.begin() + i);
-            }
-        }
+		if (Crosses[i].Lines.size() == 2 && Crosses[i].Lines[0].Pos != lpMIDDLE && Crosses[i].Lines[1].Pos != lpMIDDLE) {
+			Crosses.erase(Crosses.begin() + i);
+		} else {
+			Crosses[i].UpdateAngle();
+			if (Crosses[i].Type == sNone)
+				Crosses.erase(Crosses.begin() + i);
+		}
 	}
-	for (i = Crosses.size() - 1; i > -1; i--) {
-		Crosses[i].UpdateAngle();
-		if (Crosses[i].Type == sNone) {
-            Crosses.erase(Crosses.begin() + i);
-        }
-    }
-    return;
+	return;
 }
 
 //---------------------------------------------------------------------------
@@ -163,4 +159,39 @@ eLinePos __fastcall TPlan::OnLine(const double x, const double y, TLine * Line) 
 
 	} else
 		return lpNONE;
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TPlan::DistinguishPath(void) {
+	int i, p;
+	for (i = 0; i < Lines.size(); i++) {    // 获得股道和驼峰所在线段
+		if (IsHumpLine(&Lines[i])) {
+			HumpLine = &Lines[i];
+		}
+		if (IsTrackLine(&Lines[i])) {
+			TrackLines.push_back(&Lines[i]);
+		}
+	}
+	for (i = 0; i < TrackLines.size(); i++) {
+		TPath Path;
+		Path.push_back(TrackLines[i]);
+		Paths.push_back(Path);
+		p = Paths.size() - 1;
+		Next(p);
+	}
+	return;
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TPlan::Next(const int p) {
+	int i, e = Paths[p].size() - 1;
+	int x1, x2;
+	if (Paths[p][e].type() == typeid(TArc *)) {
+		x1 = min(boost::any_cast<TArc*>(Paths[p][e])->StartX, boost::any_cast<TArc*>(Paths[p][e])->EndX);
+		for (i = 0; i < Arcs.size(); i++) {
+
+		}
+	}
+	Next(p);
+	return;
 }
