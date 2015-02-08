@@ -5,6 +5,7 @@
 
 #include <boost/any.hpp>
 #include "TArc.h"
+#include "TCross.h"
 //---------------------------------------------------------------------------
 enum eEntityType {etUNKNOWN, etSWITCH, etARC};
 /*

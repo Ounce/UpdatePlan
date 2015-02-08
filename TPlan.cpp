@@ -184,14 +184,51 @@ void __fastcall TPlan::DistinguishPath(void) {
 
 //---------------------------------------------------------------------------
 void __fastcall TPlan::Next(const int p) {
-	int i, e = Paths[p].size() - 1;
-	int x1, x2;
-	if (Paths[p][e].type() == typeid(TArc *)) {
-		x1 = min(boost::any_cast<TArc*>(Paths[p][e])->StartX, boost::any_cast<TArc*>(Paths[p][e])->EndX);
-		for (i = 0; i < Arcs.size(); i++) {
-
+	bool f;
+	TArc *A;
+	TLine *L;
+	TCross *C;
+	int i, j, e = Paths[p].size() - 1;
+	if (Paths[p][e].type() == typeid(TArc *)) {      // 曲线只有可能连接线段。
+		A = boost::any_cast<TArc*>(Paths[p][e]);
+		for (i = 0; i < Lines.size(); i++) {
+			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
+				Paths[p].push_back(&Lines[i]);
+				Next(p);
+				return;
+			}
 		}
+		// 结束这个Path的识别
+	} else if (Paths[p][e].type() == typeid(TLine *)) {	// 线段可能连接 道岔、曲线和线段
+		L = boost::any_cast<TLine *>(Paths[p][e]);
+		for (i = 0; i < Crosses.size(); i++) {
+			if (OnLine(Crosses[i].X, Crosses[i].Y, L))
+				if (Paths[p].FindCross(&Crosses[i]))
+					continue;           //如果已经存在就跳过。
+				else {
+					Paths[p].push_back(&Crosses[i]);
+					Next(p);
+					return;
+				}
+		}
+		for (i = 0; i < Arcs.size(); i++) {
+			if (InRange(L->StartX, L->StartY, Arcs[i].EndX, Arcs[i].EndY)) {
+				Paths[p].push_back(&Arcs[i]);
+				Next(p);
+				return;
+			}
+		}
+		for (i = 0; i < Lines.size(); i++) {
+			if (InRange(L->StartX, L->StartY, Lines[i].EndX, Lines[i].EndY)) {
+				Paths[p].push_back(&Lines[i]);
+				Next(p);
+				return;
+			}
+		}
+		// 结束这个Path
+	} else if (Paths[p][e].type() == typeid(TCross *)) {
+		C = boost::any_cast<TCross *>(Paths[p][e]);
+
 	}
-	Next(p);
 	return;
 }
