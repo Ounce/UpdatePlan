@@ -25,16 +25,20 @@ __published:	// IDE-managed Components
 	TOpenDialog *ExcelOpenDialog;
 	TImage *Image1;
 	TButton *DrawButton;
-	TButton *DistinguishButton;
+	TButton *DistinguishCrossesButton;
 	TLabel *Label1;
 	TButton *DrawSwitchesButton;
 	TListBox *ListBox1;
+	TButton *DistinguishPathsButton;
+	TButton *DrawPathsButton;
+	TLabel *Label2;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
 	void __fastcall DrawButtonClick(TObject *Sender);
-	void __fastcall DistinguishButtonClick(TObject *Sender);
+	void __fastcall DistinguishCrossesButtonClick(TObject *Sender);
 	void __fastcall DrawSwitchesButtonClick(TObject *Sender);
 	void __fastcall ListBox1Click(TObject *Sender);
+	void __fastcall DistinguishPathsButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	TPlan Plan;

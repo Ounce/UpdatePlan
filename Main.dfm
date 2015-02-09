@@ -18,13 +18,20 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 208
-    Top = 476
+    Left = 136
+    Top = 392
     Width = 31
     Height = 13
     Anchors = [akLeft, akBottom]
     Caption = 'Label1'
-    ExplicitTop = 428
+  end
+  object Label2: TLabel
+    Left = 136
+    Top = 469
+    Width = 31
+    Height = 20
+    Anchors = [akLeft, akBottom]
+    Caption = 'Label2'
   end
   object PlanDataAdvStringGrid: TAdvStringGrid
     Left = 0
@@ -120,7 +127,7 @@ object MainForm: TMainForm
       Left = 0
       Top = 0
       Width = 606
-      Height = 397
+      Height = 448
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       ExplicitHeight = 363
@@ -128,7 +135,7 @@ object MainForm: TMainForm
   end
   object OpenButton: TButton
     Left = 8
-    Top = 445
+    Top = 425
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -148,7 +155,7 @@ object MainForm: TMainForm
   end
   object DrawButton: TButton
     Left = 104
-    Top = 445
+    Top = 425
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -156,19 +163,19 @@ object MainForm: TMainForm
     TabOrder = 3
     OnClick = DrawButtonClick
   end
-  object DistinguishButton: TButton
-    Left = 208
-    Top = 445
+  object DistinguishCrossesButton: TButton
+    Left = 200
+    Top = 405
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = #35782#21035
+    Caption = #35782#21035#36947#23700
     TabOrder = 4
-    OnClick = DistinguishButtonClick
+    OnClick = DistinguishCrossesButtonClick
   end
   object DrawSwitchesButton: TButton
-    Left = 305
-    Top = 445
+    Left = 289
+    Top = 405
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -186,6 +193,25 @@ object MainForm: TMainForm
     ItemHeight = 13
     TabOrder = 6
     OnClick = ListBox1Click
+  end
+  object DistinguishPathsButton: TButton
+    Left = 200
+    Top = 456
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = #35782#21035#32447#36335
+    TabOrder = 7
+    OnClick = DistinguishPathsButtonClick
+  end
+  object DrawPathsButton: TButton
+    Left = 289
+    Top = 456
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = #32472#21046#32447#36335
+    TabOrder = 8
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'

@@ -18,6 +18,20 @@ public:
 		}
 		return false;
 	}
+    bool __fastcall FindLine(TLine * L) {
+        for (int i = 0; i < size(); i++) {
+            if (at(i).type() == typeid(TLine *) && boost::any_cast<TLine *>(at(i)) == L)
+                return true;
+        }
+        return false;
+    }
+    void __fastcall Add(TLine * L) {
+        if (!FindLine(L)) {
+            push_back(L);
+            Angle = L->StartAngle;
+        }
+        return;
+    }
 };
 
 class TPaths : public vector<TPath> {

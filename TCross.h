@@ -8,7 +8,7 @@
 #include "TSwitch.h"
 
 //---------------------------------------------------------------------------
-enum eLinePos {lpNONE, lpSTART, lpMIDDLE, lpEND };
+enum eLinePos {lpNONE, lpSTART, lpMIDDLE, lpEND};
 enum eLineType {ltUNKNOW, ltMAIN, ltBRANCH};
 
 //---------------------------------------------------------------------------

@@ -57,8 +57,8 @@ void __fastcall TMainForm::Import(void) {
 			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
 			Plan.Lines.push_back(Line);
         }
-        if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {
-            Arc.CenterX = PlanDataAdvStringGrid->Floats[6][i];
+        if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {         // Arc.SweepAngle < 0 Í¹ÇúÏß
+            Arc.CenterX = PlanDataAdvStringGrid->Floats[6][i];		//	Arc.SweepAngle > 0 °¼ÇúÏß
             Arc.CenterY = PlanDataAdvStringGrid->Floats[7][i];
             Arc.Radii = PlanDataAdvStringGrid->Floats[2][i];
             Arc.StartAngle = PlanDataAdvStringGrid->Floats[4][i];
@@ -94,7 +94,7 @@ void __fastcall TMainForm::DrawButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMainForm::DistinguishButtonClick(TObject *Sender)
+void __fastcall TMainForm::DistinguishCrossesButtonClick(TObject *Sender)
 {
 	Plan.DistinguishSwitches();
 	Label1->Caption = Plan.Crosses.size();
@@ -117,6 +117,14 @@ void __fastcall TMainForm::ListBox1Click(TObject *Sender)
 	Image1->Canvas->Pen->Color = clRed;
 	Plan.Crosses[ListBox1->ItemIndex].Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
 	return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::DistinguishPathsButtonClick(TObject *Sender)
+{
+	Plan.DistinguishPath();
+    Label2->Caption = Plan.Paths.size();
+    return;
 }
 //---------------------------------------------------------------------------
 

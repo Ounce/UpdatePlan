@@ -6,7 +6,7 @@
 #include <math.h>
 //---------------------------------------------------------------------------
 
-enum eBranchSide {bsMAIN = 1, bsLEFT = 2, bsSTRAIGHT = 4, bsRIGHT = 8, bsUNKNOW = 128};        //bsMAIN —— 主分支。
+enum eBranchSide {bsMAIN = 1, bsLEFT = 2, bsSTRAIGHT = 4, bsRIGHT = 8, bsUNKNOWN = 128};        //bsMAIN —— 主分支。
 
 bool __fastcall InRange(const double x, const double y, const double X, const double Y, const double R) {
 	double dx = X - x;
