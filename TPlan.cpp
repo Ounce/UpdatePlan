@@ -194,8 +194,7 @@ void __fastcall TPlan::Next(const int p) {
 		A = boost::any_cast<TArc*>(Paths[p][e]);
 		for (i = 0; i < Lines.size(); i++) {
 			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
-				Paths[p].push_back(&Lines[i]);
-				Paths[p].Angle = Lines[i].StartAngle;
+				Paths[p].Add(&Lines[i]);
 				Next(p);
 				return;
 			}

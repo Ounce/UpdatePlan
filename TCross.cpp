@@ -67,7 +67,7 @@ void __fastcall TCross::AddLine(eLinePos Pos, TLine * Line) {
 
 //---------------------------------------------------------------------------
 void __fastcall TCross::UpdateAngle(void) {
-	int i, j, m = -1;
+	int i, j, k, m = -1;
     double a = 90;
     int SwitchType = 0;
     CrossAngleList AngleList;     //转辙角列表
@@ -101,10 +101,12 @@ void __fastcall TCross::UpdateAngle(void) {
     Lines.erase(unique(Lines.begin(), Lines.end()), Lines.end());
     MaxAngle = MinAngle = GetAngle(Lines[0].Angle, Lines[1].Angle);       //查找最大、最小角度，同时查找与其他线段夹角大于90°的线段，并设置为ltMAIN
     MaxAngleA = MaxAngleB = MinAngleA = MinAngleB = -1;
-    int k = 0;
     for (i = 0; i < Lines.size(); i++) {
-        for (j = i + 1; j < Lines.size(); j++) {
-        	a = GetAngle(Lines[i].Angle, Lines[j].Angle);
+	    k = 0;
+        for (j = 0; j < Lines.size(); j++) {
+            if (i == j)
+                continue;
+            a = GetAngle(Lines[i].Angle, Lines[j].Angle);
             if (a > 90) {
                 k++;
             }
@@ -112,7 +114,8 @@ void __fastcall TCross::UpdateAngle(void) {
                 MaxAngle = a;
                 MaxAngleA = i;
                 MaxAngleB = j;
-            } else if (a < MinAngle) {
+            }
+            if (a < MinAngle) {
             	MinAngle = a;
                 MinAngleA = i;
                 MinAngleB = j;
@@ -182,11 +185,13 @@ void __fastcall TCross::UpdateAngle(void) {
 	            default:
                 	Type = sNone;
             }
+            break;
         case 15:	//三开对称
         	if (FrogNumber == 7)
                 Type = sTreble7;
             else
             	Type = sNone;
+            break;
 	    default:
         	Type = sNone;
     }

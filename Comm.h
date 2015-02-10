@@ -19,7 +19,7 @@ bool __fastcall InRange(const double x, const double y, const double X, const do
 
 //---------------------------------------------------------------------------
 double __fastcall OppositeAngle(const double Angle) {
-    if (Angle >= 180) {
+    if (Angle >= 179.999) {
 		return Angle - 180;
     } else {
 		return Angle + 180;
@@ -30,7 +30,7 @@ double __fastcall OppositeAngle(const double Angle) {
 double __fastcall GetAngle(const double StartAngle, const double EndAngle) {
 	double a;
     a = fabs(StartAngle - EndAngle);
-    if (a >= 180)
+    if (a >= 179.999)
         return 360 - a;
     else
     	return a;
@@ -47,8 +47,8 @@ bool __fastcall EqualAngle(const double AngleA, const double AngleB) {
 
 //---------------------------------------------------------------------------
 eBranchSide __fastcall GetBranchSide(const double MainAngle, const double BranchAngle) {
-	if (MainAngle == BranchAngle) return bsMAIN;
-    if (MainAngle == OppositeAngle(MainAngle)) return bsSTRAIGHT;
+	if (fabs(MainAngle - BranchAngle) < 0.001) return bsMAIN;
+    if (fabs(MainAngle - OppositeAngle(BranchAngle)) < 0.001) return bsSTRAIGHT;
     if (MainAngle > 180) {
         if (BranchAngle < MainAngle && BranchAngle > OppositeAngle(MainAngle)) return bsLEFT;
         else return bsRIGHT;
