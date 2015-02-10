@@ -28,6 +28,7 @@ public:
 	void __fastcall DrawCrosses(TImage * Image);
 	void __fastcall DistinguishPath(void);
 private:
+	int p;
 	double MaxX, MaxY, MinX, MinY, Width, Height;
 	void __fastcall SetMaxMin(void);
 	eLinePos __fastcall OnLine(const double x, const double y, TLine * Line);

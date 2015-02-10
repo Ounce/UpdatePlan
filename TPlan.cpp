@@ -163,7 +163,8 @@ eLinePos __fastcall TPlan::OnLine(const double x, const double y, TLine * Line) 
 
 //---------------------------------------------------------------------------
 void __fastcall TPlan::DistinguishPath(void) {
-	int i, p;
+	int i;
+    int e;
 	for (i = 0; i < Lines.size(); i++) {    // 获得股道和驼峰所在线段
 		if (IsHumpLine(&Lines[i])) {
 			HumpLine = &Lines[i];
@@ -179,6 +180,21 @@ void __fastcall TPlan::DistinguishPath(void) {
 		Paths.push_back(Path);
 		p = Paths.size() - 1;
 		Next(p);
+        e = Paths[p].size() - 1;
+        if (Paths[p][e].type() == typeid(TLine *) && boost::any_cast<TLine *>(Paths[p][e]) == HumpLine) {
+		    if (p >= Paths.size()) {
+        		continue;		// 结束识别
+	    	} else {
+                p++;
+		    	Next(p);
+            }
+        } else {
+		    Paths.erase(Paths.begin() + p);
+		    if (p >= Paths.size())
+        		continue;
+            else
+			    Next(p);
+        }
 	}
 	return;
 }
@@ -201,22 +217,25 @@ void __fastcall TPlan::Next(const int p) {
 		}
 	} else if (Paths[p][e].type() == typeid(TLine *)) {	// 线段可能连接 道岔、曲线和线段
 		L = boost::any_cast<TLine *>(Paths[p][e]);
-		fc = false;
 		for (i = 0; i < Crosses.size(); i++) {
 			if (OnLine(Crosses[i].X, Crosses[i].Y, L)) {
 				if (Paths[p].FindCross(&Crosses[i]))
 					continue;           //如果已经存在就跳过。
 				else {
 					Paths[p].push_back(&Crosses[i]);       // 线段可能有多个道岔。
-					Paths.push_back(Paths[p]);
-					fc = true;
+                	if (InRange(Crosses[i].X, Crosses[i].Y, L->StartX, L->StartY, 1)) {
+                        Next(p);
+                        return;
+                    } else {
+						Paths.push_back(Paths[p]);
+                    }
 				}
 			}
 		}
-		if (fc) {
+/*		if (fc) {
 			Next(p);
 			return;
-		}
+		}	*/
 		for (i = 0; i < Arcs.size(); i++) {
 			if (InRange(L->StartX, L->StartY, Arcs[i].EndX, Arcs[i].EndY, 1)) {
 				Paths[p].push_back(&Arcs[i]);
@@ -246,20 +265,5 @@ void __fastcall TPlan::Next(const int p) {
         Next(p);
         return;
 	}
-    if (Paths[p][e].type() == typeid(TLine *)) {
-        L = boost::any_cast<TLine *>(Paths[p][e]);
-        if (L == HumpLine) {
-		    if (p >= Paths.size()) {
-        		return;		// 结束识别
-	    	}
-    	Next(p);
-        return;
-        }
-    }
-    Paths.erase(Paths.begin() + p);
-    if (p >= Paths.size()) {
-        return;		// 结束识别
-    }
-    Next(p);
 	return;
 }
