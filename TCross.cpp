@@ -52,8 +52,65 @@ TCrossLine & __fastcall TCrossLine::operator = (const TCrossLine & CrossLine) {
     StartSign = CrossLine.StartSign;
     EndSign = CrossLine.EndSign;
     ptr = CrossLine.ptr;
-    Pos = CrossLine.Pos;
+	Pos = CrossLine.Pos;
+	Type = CrossLine.Type;
     return *this;
+}
+
+__fastcall TCross::TCross() {
+	MainNumber = LeftNumber = RightNumber = StraightNumber = -1;
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TCross::SetLineType(eBranchSide BranchSide, int LineNumber) {
+	switch (BranchSide) {
+		case bsMAIN:
+			MainNumber = LineNumber;
+			break;
+		case bsLEFT:
+			LeftNumber = LineNumber;
+			break;
+		case bsSTRAIGHT:
+			StraightNumber = LineNumber;
+			break;
+		case bsRIGHT:
+			RightNumber = LineNumber;
+			break;
+		case bsUNKNOWN:
+		default:
+		;
+	}
+	return;
+}
+
+//---------------------------------------------------------------------------
+TCrossLine * __fastcall TCross::GetLine(eBranchSide BranchSide) {
+	for (int i = 0; i < Lines.size(); i++) {
+		if (Lines[i].Type == BranchSide) {
+			return &Lines[i];
+		}
+	}
+	return NULL;
+}
+
+//---------------------------------------------------------------------------
+TCrossLine * __fastcall TCross::GetMainLine(void) {
+	return &Lines[MainNumber];
+}
+
+//---------------------------------------------------------------------------
+TCrossLine * __fastcall TCross::GetLeftLine(void) {
+	return GetLine(bsLEFT);
+}
+
+//---------------------------------------------------------------------------
+TCrossLine * __fastcall TCross::GetRightLine(void) {
+	return GetLine(bsRIGHT);
+}
+
+//---------------------------------------------------------------------------
+TCrossLine * __fastcall TCross::GetStraight(void) {
+	return GetLine(bsSTRAIGHT);
 }
 
 //---------------------------------------------------------------------------
@@ -127,8 +184,9 @@ void __fastcall TCross::UpdateAngle(void) {
     }
     for (i = 0; i < Lines.size(); i++) {
         Lines[i].Type = GetBranchSide(Lines[MainLineNumber].Angle, Lines[i].Angle);
-        SwitchType += Lines[i].Type;
-    }
+		SwitchType += Lines[i].Type;
+		SetLineType(Lines[i].Type, i);
+	}
     FrogNumber = -1;                                  //根据最小角查找对应的辙岔号。
     for (i = 0; i < AngleList.size(); i++) {
         if (EqualAngle(MinAngle, AngleList[i].Angle)) {
