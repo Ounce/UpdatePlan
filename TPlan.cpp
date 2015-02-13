@@ -72,7 +72,8 @@ void __fastcall TPlan::DistinguishSwitches(void) {
 		if (Lines[i].StartSign && Lines[i].EndSign) continue;
 		StartCross.Lines.clear();
 		EndCross.Lines.clear();
-		for (j = i + 1; j < Lines.size(); j++) {
+		for (j = 0; j < Lines.size(); j++) {
+        	if (i == j) continue;
 			if (Lines[j].Length < 5)continue;
 			if (!Lines[i].StartSign) {
 				lp = OnLine(Lines[i].StartX, Lines[i].StartY, &Lines[j]);
@@ -128,7 +129,6 @@ void __fastcall TPlan::DistinguishSwitches(void) {
             Crosses.push_back(EndCross);
         }
     }
-
     //删除非道岔
     for (i = Crosses.size() - 1; i > -1 ; i--) {
 		if (Crosses[i].Lines.size() == 2 && Crosses[i].Lines[0].Pos != lpMIDDLE && Crosses[i].Lines[1].Pos != lpMIDDLE) {
