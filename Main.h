@@ -41,6 +41,7 @@ __published:	// IDE-managed Components
 	void __fastcall ListBox1Click(TObject *Sender);
 	void __fastcall DistinguishPathsButtonClick(TObject *Sender);
 	void __fastcall ListBox2Click(TObject *Sender);
+	void __fastcall DrawPathsButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	TPlan Plan;

@@ -166,6 +166,7 @@ void __fastcall TPlan::DistinguishPath(void) {
 	int i;
     int e;
 	for (i = 0; i < Lines.size(); i++) {    // 获得股道和驼峰所在线段
+		if (Lines[i].Length < 5) continue;
 		if (IsHumpLine(&Lines[i])) {
 			HumpLine = &Lines[i];
 		}
@@ -194,6 +195,7 @@ void __fastcall TPlan::Next(const int p) {
 	if (Paths[p][e].type() == typeid(TArc *)) {      // 曲线只有可能连接线段。
 		A = boost::any_cast<TArc*>(Paths[p][e]);
 		for (i = 0; i < Lines.size(); i++) {
+			if (Lines[i].Length < 5) continue;
 			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
 				Paths[p].Add(&Lines[i]);
 				Next(p);
@@ -207,39 +209,39 @@ void __fastcall TPlan::Next(const int p) {
 				if (Paths[p].FindCross(&Crosses[i]))
 					continue;           //如果已经存在就跳过。
 				Paths[p].push_back(&Crosses[i]);       // 线段可能有多个道岔。且只能是直股在这个线段上。
-                if (InRange(Crosses[i].X, Crosses[i].Y, L->StartX, L->StartY, 1)) {      //Start点连接道岔
-                	TPath Path;
-                    TPaths Ps;
-                    if (Crosses[i].Main->Angle != Paths[p].Angle) {   //逆向道岔
+				if (InRange(Crosses[i].X, Crosses[i].Y, L->StartX, L->StartY, 1)) {      //Start点连接道岔
+					TPath Path;
+					TPaths Ps;
+					if (Crosses[i].Main->Angle != Paths[p].Angle) {   //逆向道岔
 						Paths[p].Add(Crosses[i].Main->ptr);
-                        Next(p);
-                        return;
-                    } else {                                   //顺序道岔
-                    	for (j = 0; j < Crosses[i].Lines.size(); j++) {
-                    		if (Crosses[i].Lines[j].Angle == Paths[p].Angle) continue;
-    	                    Path.Add(Crosses[i].Lines[j].ptr);
-                            Ps.push_back(Path);
-                    	}
-                        for (j = 1; j < Ps.size(); j++) {
-                            Paths.push_back(Ps[j]);
-                        }
-                        Paths[p] = Ps[0];
-                        Next(p);
-                        return;
-                    }
-                } else {                  // 线段中间有道岔。
+						Next(p);
+						return;
+					} else {                                   //顺序道岔
+						for (j = 0; j < Crosses[i].Lines.size(); j++) {
+							if (Crosses[i].Lines[j].Angle == Paths[p].Angle) continue;
+							Path.Add(Crosses[i].Lines[j].ptr);
+							Ps.push_back(Path);
+						}
+						for (j = 1; j < Ps.size(); j++) {
+							Paths.push_back(Ps[j]);
+						}
+						Paths[p] = Ps[0];
+						Next(p);
+						return;
+					}
+				} else {                  // 线段中间有道岔。
 					if (Crosses[i].Main->Angle == Paths[p].Angle) { // 顺向道岔。 逆向道岔就什么也不做，因为要加入的就是这个线段。
-	                	TPath Path;
-    	                if (Crosses[i].Left != NULL) {
-                        	Path = Paths[p];
-            				Path.Add(Crosses[i].Left->ptr);
-                            Paths.push_back(Path);
-                        }
-                        if (Crosses[i].Right != NULL) {
-                            Path = Paths[p];
-                            Path.Add(Crosses[i].Right->ptr);
-                            Paths.push_back(Path);
-                        }
+						TPath Path;
+						if (Crosses[i].Left != NULL) {
+							Path = Paths[p];
+							Path.Add(Crosses[i].Left->ptr);
+							Paths.push_back(Path);
+						}
+						if (Crosses[i].Right != NULL) {
+							Path = Paths[p];
+							Path.Add(Crosses[i].Right->ptr);
+							Paths.push_back(Path);
+						}
 					}
 				}
 			}
@@ -253,6 +255,7 @@ void __fastcall TPlan::Next(const int p) {
 			}
 		}
 		for (i = 0; i < Lines.size(); i++) {
+			if (Lines[i].Length < 5) continue;
 			if (InRange(L->StartX, L->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
 				Paths[p].Add(&Lines[i]);
 				Next(p);

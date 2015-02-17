@@ -14,3 +14,10 @@ void __fastcall TPath::Draw(TImage * Image, float Scale, int OriginX, int Origin
 		}
 	}
 }
+
+void __fastcall TPaths::Draw(TImage * Image, float Scale, int OriginX, int OriginY) {
+	for (int i = 0; i < size(); i++) {
+		at(i).Draw(Image, Scale, OriginX, OriginY);
+	}
+	return;
+}

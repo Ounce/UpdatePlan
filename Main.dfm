@@ -123,12 +123,11 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
-    ExplicitWidth = 610
     object Image1: TImage
       Left = 0
       Top = 0
       Width = 776
-      Height = 482
+      Height = 499
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       ExplicitWidth = 606
@@ -214,6 +213,7 @@ object MainForm: TMainForm
     Anchors = [akLeft, akBottom]
     Caption = #32472#21046#32447#36335
     TabOrder = 8
+    OnClick = DrawPathsButtonClick
   end
   object ListBox2: TListBox
     Left = 538

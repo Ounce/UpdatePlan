@@ -42,9 +42,6 @@ void __fastcall TMainForm::Import(void) {
     for (int i = 1; i < PlanDataAdvStringGrid->RowCount; i++) {
 		if (PlanDataAdvStringGrid->Cells[1][i] == L"Ö±Ïß") {
 			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
-            if (Line.Length < 5) {
-                continue;
-            }
 			if (PlanDataAdvStringGrid->Floats[17][i] > PlanDataAdvStringGrid->Floats[13][i]) {
 				Line.StartX = PlanDataAdvStringGrid->Floats[13][i];
 				Line.StartY = PlanDataAdvStringGrid->Floats[14][i];
@@ -141,6 +138,13 @@ void __fastcall TMainForm::ListBox2Click(TObject *Sender)
 	Image1->Canvas->Pen->Color = clBlue;
 	Plan.Paths[ListBox2->ItemIndex].Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
 	Image1->Canvas->Pen->Color = old;
+	return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::DrawPathsButtonClick(TObject *Sender)
+{
+	Plan.Paths.Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
 	return;
 }
 //---------------------------------------------------------------------------
