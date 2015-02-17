@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   Caption = #25972#29702#24179#38754#22270#25968#25454
   ClientHeight = 497
-  ClientWidth = 610
+  ClientWidth = 780
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,7 +13,7 @@ object MainForm: TMainForm
   OldCreateOrder = False
   WindowState = wsMaximized
   DesignSize = (
-    610
+    780
     497)
   PixelsPerInch = 96
   TextHeight = 13
@@ -29,14 +29,14 @@ object MainForm: TMainForm
     Left = 136
     Top = 469
     Width = 31
-    Height = 20
+    Height = 13
     Anchors = [akLeft, akBottom]
     Caption = 'Label2'
   end
   object PlanDataAdvStringGrid: TAdvStringGrid
     Left = 0
     Top = 0
-    Width = 610
+    Width = 780
     Height = 370
     Cursor = crDefault
     Align = alTop
@@ -123,13 +123,15 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
+    ExplicitWidth = 610
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 606
-      Height = 448
+      Width = 776
+      Height = 482
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
+      ExplicitWidth = 606
       ExplicitHeight = 363
     end
   end
@@ -144,8 +146,8 @@ object MainForm: TMainForm
     OnClick = OpenButtonClick
   end
   object CloseButton: TButton
-    Left = 517
-    Top = 440
+    Left = 665
+    Top = 425
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -212,6 +214,16 @@ object MainForm: TMainForm
     Anchors = [akLeft, akBottom]
     Caption = #32472#21046#32447#36335
     TabOrder = 8
+  end
+  object ListBox2: TListBox
+    Left = 538
+    Top = 392
+    Width = 121
+    Height = 97
+    Anchors = [akLeft, akBottom]
+    ItemHeight = 13
+    TabOrder = 9
+    OnClick = ListBox2Click
   end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'

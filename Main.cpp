@@ -41,6 +41,10 @@ void __fastcall TMainForm::Import(void) {
     TArc Arc;
     for (int i = 1; i < PlanDataAdvStringGrid->RowCount; i++) {
 		if (PlanDataAdvStringGrid->Cells[1][i] == L"Ö±Ïß") {
+			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
+            if (Line.Length < 5) {
+                continue;
+            }
 			if (PlanDataAdvStringGrid->Floats[17][i] > PlanDataAdvStringGrid->Floats[13][i]) {
 				Line.StartX = PlanDataAdvStringGrid->Floats[13][i];
 				Line.StartY = PlanDataAdvStringGrid->Floats[14][i];
@@ -54,7 +58,6 @@ void __fastcall TMainForm::Import(void) {
 				Line.EndY = PlanDataAdvStringGrid->Floats[14][i];
 				Line.StartAngle = PlanDataAdvStringGrid->Floats[16][i];
             }
-			Line.Length = PlanDataAdvStringGrid->Floats[5][i];
 			Plan.Lines.push_back(Line);
         }
         if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {         // Arc.SweepAngle < 0 Í¹ÇúÏß
@@ -123,8 +126,22 @@ void __fastcall TMainForm::ListBox1Click(TObject *Sender)
 void __fastcall TMainForm::DistinguishPathsButtonClick(TObject *Sender)
 {
 	Plan.DistinguishPath();
-    Label2->Caption = Plan.Paths.size();
+	Label2->Caption = Plan.Paths.size();
+	for (int i = 0; i < Plan.Paths.size(); i++) {
+		ListBox2->Items->Add(IntToStr(i) + L" ---- ");
+	}
     return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::ListBox2Click(TObject *Sender)
+{
+	TColor old;
+	old = Image1->Canvas->Pen->Color;
+	Image1->Canvas->Pen->Color = clBlue;
+	Plan.Paths[ListBox2->ItemIndex].Draw(Image1, Plan.Scale, Plan.OriginX, Plan.OriginY);
+	Image1->Canvas->Pen->Color = old;
+	return;
 }
 //---------------------------------------------------------------------------
 

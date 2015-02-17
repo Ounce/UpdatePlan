@@ -134,9 +134,6 @@ void __fastcall TCross::UpdateAngle(void) {
     MainLineNumber = -1;
     eBranchSide BranchSide;
     for (i = 0; i < Lines.size(); i++) {          // ²ð·ÖlpMIDDLEµÄÏß¶Î
-    if (Lines[i].StartX == 2296.1988) {
-    	MessageBox(NULL, L"This Line is MIDDLE", L"Information", MB_OK);
-    }
         if (Lines[i].Pos == lpMIDDLE) {
         	CL = Lines[i];
             Lines[i].EndX = X;

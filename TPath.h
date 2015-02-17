@@ -31,7 +31,8 @@ public:
             Angle = L->StartAngle;
         }
         return;
-    }
+	}
+	void __fastcall Draw(TImage * Image, float Scale, int OriginX, int OriginY);
 };
 
 class TPaths : public vector<TPath> {

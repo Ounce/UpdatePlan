@@ -32,6 +32,7 @@ __published:	// IDE-managed Components
 	TButton *DistinguishPathsButton;
 	TButton *DrawPathsButton;
 	TLabel *Label2;
+	TListBox *ListBox2;
 	void __fastcall CloseButtonClick(TObject *Sender);
 	void __fastcall OpenButtonClick(TObject *Sender);
 	void __fastcall DrawButtonClick(TObject *Sender);
@@ -39,6 +40,7 @@ __published:	// IDE-managed Components
 	void __fastcall DrawSwitchesButtonClick(TObject *Sender);
 	void __fastcall ListBox1Click(TObject *Sender);
 	void __fastcall DistinguishPathsButtonClick(TObject *Sender);
+	void __fastcall ListBox2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	TPlan Plan;
