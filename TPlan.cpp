@@ -196,7 +196,7 @@ void __fastcall TPlan::Next(const int p) {
 		A = boost::any_cast<TArc*>(Paths[p][e]);
 		for (i = 0; i < Lines.size(); i++) {
 			if (Lines[i].Length < 5) continue;
-			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 1)) {
+			if (InRange(A->StartX, A->StartY, Lines[i].EndX, Lines[i].EndY, 2)) {
 				Paths[p].Add(&Lines[i]);
 				Next(p);
 				return;
@@ -209,7 +209,7 @@ void __fastcall TPlan::Next(const int p) {
 				if (Paths[p].FindCross(&Crosses[i]))
 					continue;           //如果已经存在就跳过。
 				Paths[p].push_back(&Crosses[i]);       // 线段可能有多个道岔。且只能是直股在这个线段上。
-				if (InRange(Crosses[i].X, Crosses[i].Y, L->StartX, L->StartY, 1)) {      //Start点连接道岔
+				if (InRange(Crosses[i].X, Crosses[i].Y, L->StartX, L->StartY, 2)) {      //Start点连接道岔
 					TPath Path;
 					TPaths Ps;
 					if (Crosses[i].Main->Angle != Paths[p].Angle) {   //逆向道岔
@@ -247,7 +247,7 @@ void __fastcall TPlan::Next(const int p) {
 			}
 		}
 		for (i = 0; i < Arcs.size(); i++) {
-			if (InRange(L->StartX, L->StartY, Arcs[i].EndX, Arcs[i].EndY, 1)) {
+			if (InRange(L->StartX, L->StartY, Arcs[i].EndX, Arcs[i].EndY, 2)) {
 				Paths[p].push_back(&Arcs[i]);
 				Paths[p].Angle = (Arcs[i].SweepAngle < 0) ? Arcs[i].StartAngle + 90 : Arcs[i].StartAngle + Arcs[i].SweepAngle - 90;
 				Next(p);
