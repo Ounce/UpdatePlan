@@ -2,6 +2,10 @@
 ## Eclipse
 #################
 
+*.dwl
+*.dwl2
+
+
 __history/
 
 *.pydevproject
