@@ -59,6 +59,7 @@ TCrossLine & __fastcall TCrossLine::operator = (const TCrossLine & CrossLine) {
 
 __fastcall TCross::TCross() {
 	MainNumber = LeftNumber = RightNumber = StraightNumber = -1;
+	Position = -1;
 }
 
 //---------------------------------------------------------------------------

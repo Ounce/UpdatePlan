@@ -8,6 +8,8 @@
 
 void __fastcall TPath::SetPosition(void) {
 	float Position = 0;
+	float x, y;
+	float sx, sy;
 	TLine* L;
 	TCross* C;
 	TArc * A;
@@ -16,16 +18,29 @@ void __fastcall TPath::SetPosition(void) {
 		if (at(i).type() == typeid(TLine *)) {
 			L = boost::any_cast<TLine *>(at(i));
 			Position += L->Length;
+			x = L->EndX;
+			y = L->EndY;
 		} else if (at(i).type() == typeid(TArc *)) {
 			A = boost::any_cast<TArc *>(at(i));
 			if (A->Begin < 0.001) {
 				A->Begin = Position;
 				Position += A->Length;
 				A->End = Position;
+				x = A->EndX;
+				y = A->EndY;
 			}
 		} else if (at(i).type() == typeid(TCross *)) {
 			C = boost::any_cast<TCross *>(at(i));
-			if (C->Position < 0.001) C->Position = Position;
+			if (C->Position < 5) {
+				if (C->X > x + 5) {
+					sx = fabs(x - C->X);
+					sy = fabs(y - C->Y);
+					Position += sqrt(sx * sx + sy * sy);
+					x = C->X;
+					y = C->Y;
+				}
+				C->Position = Position;
+			}
 		}
 	}
 	return;
