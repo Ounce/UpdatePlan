@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   Caption = #25972#29702#24179#38754#22270#25968#25454
   ClientHeight = 497
-  ClientWidth = 780
+  ClientWidth = 835
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,13 +13,13 @@ object MainForm: TMainForm
   OldCreateOrder = False
   WindowState = wsMaximized
   DesignSize = (
-    780
+    835
     497)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 136
-    Top = 392
+    Top = 386
     Width = 31
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -27,7 +27,7 @@ object MainForm: TMainForm
   end
   object Label2: TLabel
     Left = 136
-    Top = 469
+    Top = 437
     Width = 31
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -36,7 +36,7 @@ object MainForm: TMainForm
   object PlanDataAdvStringGrid: TAdvStringGrid
     Left = 0
     Top = 0
-    Width = 780
+    Width = 835
     Height = 370
     Cursor = crDefault
     Align = alTop
@@ -123,11 +123,12 @@ object MainForm: TMainForm
     SearchFooter.HintHighlight = 'Highlight occurrences'
     SearchFooter.MatchCaseCaption = 'Match case'
     Version = '5.8.7.0'
+    ExplicitWidth = 780
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 776
-      Height = 499
+      Width = 831
+      Height = 533
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       ExplicitWidth = 606
@@ -136,7 +137,7 @@ object MainForm: TMainForm
   end
   object OpenButton: TButton
     Left = 8
-    Top = 425
+    Top = 405
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -145,18 +146,18 @@ object MainForm: TMainForm
     OnClick = OpenButtonClick
   end
   object CloseButton: TButton
-    Left = 665
-    Top = 425
+    Left = 752
+    Top = 456
     Width = 75
     Height = 25
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     Caption = #20851#38381
     TabOrder = 2
     OnClick = CloseButtonClick
   end
   object DrawButton: TButton
-    Left = 104
-    Top = 425
+    Left = 8
+    Top = 456
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -165,7 +166,7 @@ object MainForm: TMainForm
     OnClick = DrawButtonClick
   end
   object DistinguishCrossesButton: TButton
-    Left = 200
+    Left = 104
     Top = 405
     Width = 75
     Height = 25
@@ -175,7 +176,7 @@ object MainForm: TMainForm
     OnClick = DistinguishCrossesButtonClick
   end
   object DrawSwitchesButton: TButton
-    Left = 289
+    Left = 201
     Top = 405
     Width = 75
     Height = 25
@@ -185,7 +186,7 @@ object MainForm: TMainForm
     OnClick = DrawSwitchesButtonClick
   end
   object ListBox1: TListBox
-    Left = 390
+    Left = 294
     Top = 392
     Width = 121
     Height = 97
@@ -196,7 +197,7 @@ object MainForm: TMainForm
     OnClick = ListBox1Click
   end
   object DistinguishPathsButton: TButton
-    Left = 200
+    Left = 104
     Top = 456
     Width = 75
     Height = 25
@@ -206,7 +207,7 @@ object MainForm: TMainForm
     OnClick = DistinguishPathsButtonClick
   end
   object DrawPathsButton: TButton
-    Left = 289
+    Left = 201
     Top = 456
     Width = 75
     Height = 25
@@ -216,7 +217,7 @@ object MainForm: TMainForm
     OnClick = DrawPathsButtonClick
   end
   object ListBox2: TListBox
-    Left = 538
+    Left = 434
     Top = 392
     Width = 121
     Height = 97
@@ -225,9 +226,28 @@ object MainForm: TMainForm
     TabOrder = 9
     OnClick = ListBox2Click
   end
+  object Button1: TButton
+    Left = 752
+    Top = 405
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Caption = #35774#32622#20301#32622
+    TabOrder = 10
+    OnClick = Button1Click
+  end
+  object ListBox3: TListBox
+    Left = 576
+    Top = 392
+    Width = 161
+    Height = 97
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 13
+    TabOrder = 11
+  end
   object ExcelOpenDialog: TOpenDialog
     Filter = 'Excel'#25991#20214'(*.xls, *.xlsx)|*.xls;*xlsx|'#20840#37096#25991#20214'(*.*)|*.*'
-    Left = 112
-    Top = 344
+    Left = 56
+    Top = 328
   end
 end

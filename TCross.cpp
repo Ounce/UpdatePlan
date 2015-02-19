@@ -31,11 +31,11 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
     StartY = Line->StartY;
     EndX = Line->EndX;
     EndY = Line->EndY;
-    Length = Line->Length;
-    StartAngle = Line->StartAngle;
+	Length = Line->Length;
+	StartAngle = Line->StartAngle;
 	Angle = StartAngle;
-    StartSign = Line->StartSign;
-    EndSign = Line->EndSign;
+	StartSign = Line->StartSign;
+	EndSign = Line->EndSign;
 	ptr = Line;
 	return *this;
 }
@@ -43,18 +43,18 @@ TCrossLine & __fastcall TCrossLine::operator = (TLine * Line) {
 //---------------------------------------------------------------------------
 TCrossLine & __fastcall TCrossLine::operator = (const TCrossLine & CrossLine) {
 	StartX = CrossLine.StartX;
-    StartY = CrossLine.StartY;
-    EndX = CrossLine.EndX;
-    EndY = CrossLine.EndY;
-    Length = CrossLine.Length;
-    StartAngle = CrossLine.StartAngle;
+	StartY = CrossLine.StartY;
+	EndX = CrossLine.EndX;
+	EndY = CrossLine.EndY;
+	Length = CrossLine.Length;
+	StartAngle = CrossLine.StartAngle;
 	Angle = CrossLine.Angle;
-    StartSign = CrossLine.StartSign;
-    EndSign = CrossLine.EndSign;
-    ptr = CrossLine.ptr;
+	StartSign = CrossLine.StartSign;
+	EndSign = CrossLine.EndSign;
+	ptr = CrossLine.ptr;
 	Pos = CrossLine.Pos;
 	Type = CrossLine.Type;
-    return *this;
+	return *this;
 }
 
 __fastcall TCross::TCross() {

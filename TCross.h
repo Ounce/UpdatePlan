@@ -45,6 +45,7 @@ private:
 class TCross {
 public:
 	double X, Y;
+	double Position;
     double MinAngle, MaxAngle;
     int MinAngleA, MinAngleB, MaxAngleA, MaxAngleB;
 	int FrogNumber, MainLineNumber;

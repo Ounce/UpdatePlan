@@ -9,9 +9,10 @@
 
 class TArc {
 public:
-	double CenterX, CenterY, StartX, StartY, EndX, EndY;
+	double CenterX, CenterY, StartX, StartY, EndX, EndY, Length;
     double Radii;
-    double StartAngle, SweepAngle;
+	double StartAngle, SweepAngle;
+	double Begin, End;
 
 	void __fastcall Draw(TImage * Image, double Scale, double OriginX, double OriginY);
 };

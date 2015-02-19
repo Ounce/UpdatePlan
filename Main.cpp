@@ -58,7 +58,8 @@ void __fastcall TMainForm::Import(void) {
 			Plan.Lines.push_back(Line);
         }
         if (PlanDataAdvStringGrid->Cells[1][i] == L"Ô²»¡") {         // Arc.SweepAngle < 0 Í¹ÇúÏß
-            Arc.CenterX = PlanDataAdvStringGrid->Floats[6][i];		//	Arc.SweepAngle > 0 °¼ÇúÏß
+            Arc.Length = PlanDataAdvStringGrid->Floats[5][i];
+			Arc.CenterX = PlanDataAdvStringGrid->Floats[6][i];		//	Arc.SweepAngle > 0 °¼ÇúÏß
             Arc.CenterY = PlanDataAdvStringGrid->Floats[7][i];
             Arc.Radii = PlanDataAdvStringGrid->Floats[2][i];
             Arc.StartAngle = PlanDataAdvStringGrid->Floats[4][i];
@@ -148,4 +149,23 @@ void __fastcall TMainForm::DrawPathsButtonClick(TObject *Sender)
 	return;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Button1Click(TObject *Sender)
+{
+	WideString s;
+	Plan.Paths.SetPosition();
+	for (int i = 0; i < Plan.Paths[ListBox2->ItemIndex].size(); i++) {
+		if (Plan.Paths[ListBox2->ItemIndex][i].type() == typeid(TArc *)) {
+			s = L"Arc: Begin:" + FloatToStr(boost::any_cast<TArc *>(Plan.Paths[ListBox2->ItemIndex][i])->Begin) + L"  End:" + FloatToStr(boost::any_cast<TArc *>(Plan.Paths[ListBox2->ItemIndex][i])->End);
+			ListBox3->Items->Add(s);
+		} else if (Plan.Paths[ListBox2->ItemIndex][i].type() == typeid(TCross *)) {
+			s = L"Cross: Position:" + FloatToStr(boost::any_cast<TCross *>(Plan.Paths[ListBox2->ItemIndex][i])->Position);
+			ListBox3->Items->Add(s);
+	   	}
+	}
+
+	return;
+}
+//---------------------------------------------------------------------------
+
 

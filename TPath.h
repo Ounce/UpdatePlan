@@ -32,11 +32,13 @@ public:
         }
         return;
 	}
+	void __fastcall SetPosition(void);
 	void __fastcall Draw(TImage * Image, float Scale, int OriginX, int OriginY);
 };
 
 class TPaths : public vector<TPath> {
 public:
+	void __fastcall SetPosition(void);
 	void __fastcall Draw(TImage * Image, float Scale, int OriginX, int OriginY);
 };
 #endif
